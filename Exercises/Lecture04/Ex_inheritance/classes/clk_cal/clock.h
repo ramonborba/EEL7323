@@ -5,6 +5,8 @@
  * File: clock.h
  * Description: Inheritance exercise - Student/Professor Registry
  */
+#ifndef _CLOCK_H
+#define _CLOCK_H
 
 //Clock class
 class Clock {
@@ -17,3 +19,5 @@ class Clock {
         void readClock (int& h, int& m, int& s, bool& pm);
         void advance ();
 };
+
+#endif /* _CLOCK_H */

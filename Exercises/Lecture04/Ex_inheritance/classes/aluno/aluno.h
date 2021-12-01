@@ -5,7 +5,8 @@
  * File: aluno.cpp
  * Description: Inheritance exercise - Student/Professor Registry
  */
-
+#ifndef _ALUNO_H_
+#define _ALUNO_H_
 
 //Class Aluno definition
 class Aluno {
@@ -22,3 +23,5 @@ class Aluno {
         void calc_media();
         float get_media();
 };
+
+#endif /* _ALUNO_H_ */

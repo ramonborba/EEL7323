@@ -5,8 +5,11 @@
  * File: clk_cal.h
  * Description: Inheritance exercise - Student/Professor Registry
  */
-#include "clock.cpp"
-#include "calendar.cpp"
+#ifndef _CLK_CAL_H
+#define _CLK_CAL_H
+
+#include "clock.h"
+#include "calendar.h"
 
 //ClockCalendar class
 class ClockCalendar : public Clock, public Calendar {
@@ -14,3 +17,5 @@ class ClockCalendar : public Clock, public Calendar {
         ClockCalendar (int mt, int d, int y, int h, int m, int s, bool pm);
         void advance ();
 };
+
+#endif /* _CLK_CAL_H */

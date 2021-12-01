@@ -5,19 +5,23 @@
  * File: pessoa.h
  * Description: Inheritance exercise - Student/Professor Registry
  */
-#include <string>
-using namespace std;
+#ifndef _PESSOA_H_
+#define _PESSOA_H_
 
-#include "../clk_cal/calendar.cpp"
+#include <string>
+
+#include "../clk_cal/calendar.h"
 
 //Class Pessoa definition
 class Pessoa {
-        string nome;
+        std::string nome;
         Calendar birth;       
     public:
         Pessoa();
-        void set_nome(string);
+        void set_nome(std::string);
         void set_birth(int, int, int);
-        string get_nome();
+        std::string get_nome();
         void get_birth(int&, int&, int&);        
 };
+
+#endif /* _PESSOA_H_ */
