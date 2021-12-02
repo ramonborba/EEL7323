@@ -12,12 +12,14 @@
 
 class reg_prof {
         Professor professor[N_PROFS];
-        int pede_matricula();
-        float pede_nota();
+        int pede_id();
+        float pede_password();
+        std::string pede_nome();
+        void pede_birth(int&, int&, int&);
     public:
-        void incluir_aluno();
-        void mod_aluno(int);
-        void exclui_aluno();
-        void consulta_aluno();
-        void lista_alunos();
+        void incluir_professor();
+        void mod_professor(int = -1);
+        void exclui_professor();
+        void consulta_professor();
+        void lista_professores();
 };
