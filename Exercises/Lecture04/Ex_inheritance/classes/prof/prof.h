@@ -1,36 +1,27 @@
-/*
- * Autor: Ramon de Araujo Borba
- * Instituicao: UFSC
- * Data: 10/11/2021
- * Arquivo: prof.h
- * Descricao: Exercicio 6 da aula 2
+/**
+ * Author: Ramon de Araujo Borba < ramonborba97@gmail.com >
+ * Institution: UFSC
+ * Date: 10/11/2021
+ * File: prof.cpp
+ * Description: Inheritance exercise - Student/Professor Registry
  */
+
+#ifndef _PROF_H_
+#define _PROF_H_
+
+#include "../pessoa/pessoa.h"
 
 #define N_ALUNOS 20
 
-class Aluno {
-        int matricula;
-        float nota1;
-        float nota2;
-        float media;
+class Professor: public Pessoa {
+        int prof_id;
+        std::string password;
     public:
-        Aluno();
-        void set_nota(int, float);
-        void set_matricula(int);
-        float get_nota(int);
-        int get_matricula();
-        void calc_media();
-        float get_media();
+        Professor();
+        void set_prof_id(int = -1);
+        void set_password(std::string = "");
+        int get_prof_id();
+        std::string get_password();
 };
 
-class reg_aluno {
-        Aluno aluno[20];
-        int pede_matricula();
-        float pede_nota();
-    public:
-        void incluir_aluno();
-        void mod_aluno(int);
-        void exclui_aluno();
-        void consulta_aluno();
-        void lista_alunos();
-};
+#endif /* _PROF_H_ */

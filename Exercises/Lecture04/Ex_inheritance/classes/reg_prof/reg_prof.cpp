@@ -12,92 +12,6 @@ using namespace std;
 
 #include "reg_prof.h"
 
-
-//Membros da classe aluno
-aluno::aluno(){
-    matricula = -1;
-    nota1 = -1;
-    nota2 = -1;
-}
-
-void aluno::set_nota(int sel, float nota = 0){
-    if ((nota >= 0) && (nota <=10))
-    {
-        switch (sel)
-        {
-        case 1:
-            nota1 = nota;
-            return;
-            break;
-        
-        case 2:
-            nota2 = nota;
-            return;
-            break;
-
-        case 0:
-            nota1 = -1;
-            nota2 = -1;
-            return;
-            break;
-
-        default:
-            break;
-        }
-    }
-    else
-    {
-        cout << "Nota invalida, valor deve estar entre 0.0 e 10.0" << endl;
-    }
-}
-
-
-void aluno::set_matricula(int mat){
-    matricula = mat;
-}
-
-float aluno::get_nota(int sel){
-        switch (sel)
-        {
-        case 1:
-            return nota1;
-            break;
-
-        case 2:
-            return nota2;
-            break;
-
-        default:
-            return -1;
-            break;
-        }    
-}
-
-
-int aluno::get_matricula(){
-    return matricula;
-}
-
-void aluno::calc_media(){
-    if ((nota1 != -1) && (nota2 != -1))
-    {
-        media = (nota1+nota2)/2;
-    }
-    else
-    {
-        media = -1;
-    }    
-}
-
-float aluno::get_media(){
-    calc_media();
-    return media;
-}
-
-
-/*******************************************************************************/
-//Membros da classe turma
-
 void turma::cadastrar_estudante(){
     int mat, slot = -1;
 
@@ -138,12 +52,12 @@ void turma::cadastrar_estudante(){
         }
     }
 
-    //Cadastra matricula do novo aluno
+    //Cadastra matricula do novo professor
     if (slot != -1)
     {
         estudante[slot].set_matricula(mat);
         mod_estudante(mat);
-        cout << "Aluno cadastrado com sucesso" << endl;
+        cout << "Professor cadastrado com sucesso" << endl;
     } 
 }
 
@@ -199,7 +113,7 @@ void turma::del_estudante(){
             estudante[i].set_matricula(-1);
             estudante[i].set_nota(0);
             estudante[i].calc_media();
-            cout << "Aluno removido" << endl;
+            cout << "Professor removido" << endl;
             return;   
         }
         else if (i == (N_PROFS-1))
@@ -219,7 +133,7 @@ void turma::consulta_estudante(){
     {
         if (mat == estudante[i].get_matricula())
         {
-            cout << endl << "Consulta de aluno:" << endl;
+            cout << endl << "Consulta de professor:" << endl;
             cout    << "-Matricula: " << setw(5) << setfill('0') << estudante[i].get_matricula() << endl
                     << "-Nota 1: " << estudante[i].get_nota(1) << endl
                     << "-Nota 2: " << estudante[i].get_nota(2) << endl
@@ -242,7 +156,7 @@ void turma::lista_estudantes(){
 
     for (int i = 0; i < N_PROFS; i++)
     {
-        cout    << "Aluno " << (i+1) << ":" << endl 
+        cout    << "Professor " << (i+1) << ":" << endl 
                 << "-Matricula: " << setw(5) << setfill('0') << estudante[i].get_matricula() << endl
                 << "-Nota 1: " << estudante[i].get_nota(1) << endl
                 << "-Nota 2: " << estudante[i].get_nota(2) << endl

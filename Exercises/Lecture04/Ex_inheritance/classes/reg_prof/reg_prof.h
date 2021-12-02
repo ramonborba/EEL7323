@@ -6,25 +6,12 @@
  * Description: Inheritance exercise - Student/Professor Registry
  */
 
+#include "../prof/prof.h"
+
 #define N_PROFS 20
 
-class Aluno {
-        int matricula;
-        float nota1;
-        float nota2;
-        float media;
-    public:
-        Aluno();
-        void set_nota(int, float);
-        void set_matricula(int);
-        float get_nota(int);
-        int get_matricula();
-        void calc_media();
-        float get_media();
-};
-
-class reg_aluno {
-        Aluno aluno[20];
+class reg_prof {
+        Professor professor[N_PROFS];
         int pede_matricula();
         float pede_nota();
     public:
