@@ -140,7 +140,7 @@ void reg_prof::consulta_professor(){
             professor[i].get_birth(mo, day, yr);
             cout << endl << "Consulta de professor:" << endl;
             cout    << "- ID        : " << setw(5) << setfill('0') << professor[i].get_prof_id() << endl
-                    << "- Nome      : " << aluno[i].get_nome() << endl
+                    << "- Nome      : " << professor[i].get_nome() << endl
                     << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl;
                 return;   
         }
@@ -161,10 +161,10 @@ void reg_prof::lista_professores(){
 
     for (int i = 0; i < N_PROFS; i++)
     {
-        aluno[i].get_birth(mo, day, yr);
+        professor[i].get_birth(mo, day, yr);
         cout    << "Professor " << (i+1) << ":" << endl ;
-        cout    << "- ID        : " << setw(5) << setfill('0') << aluno[i].get_matricula() << endl
-                << "- Nome      : " << aluno[i].get_nome() << endl
+        cout    << "- ID        : " << setw(5) << setfill('0') << professor[i].get_prof_id() << endl
+                << "- Nome      : " << professor[i].get_nome() << endl
                 << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl;
     }
     
