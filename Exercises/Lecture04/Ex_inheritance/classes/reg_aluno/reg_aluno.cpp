@@ -59,7 +59,7 @@ void reg_aluno::incluir_aluno(){
     } 
 }
 
-void reg_aluno::mod_aluno(int mat = -1){
+void reg_aluno::mod_aluno(int mat){
     float nota;
     string nome;
     int mo, day, yr;

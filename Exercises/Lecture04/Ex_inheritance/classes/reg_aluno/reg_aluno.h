@@ -21,7 +21,7 @@ class reg_aluno {
         void pede_birth(int&, int&, int&);
     public:
         void incluir_aluno();
-        void mod_aluno(int);
+        void mod_aluno(int = -1);
         void exclui_aluno();
         void consulta_aluno();
         void lista_alunos();
