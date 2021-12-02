@@ -18,8 +18,8 @@ class Pessoa {
         Calendar birth;       
     public:
         Pessoa();
-        void set_nome(std::string);
-        void set_birth(int, int, int);
+        void set_nome(std::string = "");
+        void set_birth(int = 0, int = 0, int =0);
         std::string get_nome();
         void get_birth(int&, int&, int&);        
 };
