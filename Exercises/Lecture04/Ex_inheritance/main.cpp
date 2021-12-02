@@ -8,9 +8,13 @@
 #include <iostream>
 using namespace std;
 
+#include "classes/reg_aluno/reg_aluno.h"
+
+
 void pressEnterToContinue();
 
 int main(){
+    reg_aluno reg_alunos;
 
     bool sair = false;
     int op = -1;
@@ -48,22 +52,27 @@ int main(){
             break;
         
         case 3:
+            reg_alunos.incluir_aluno();
             pressEnterToContinue();
             break;
         
         case 4:
+            reg_alunos.exclui_aluno();
             pressEnterToContinue();
             break;
         
         case 5:
+            reg_alunos.mod_aluno();
             pressEnterToContinue();
             break;
         
         case 6:
+            reg_alunos.consulta_aluno();
             pressEnterToContinue();
             break;
         
         case 7:
+            reg_alunos.lista_alunos();
             pressEnterToContinue();
             break;
         
