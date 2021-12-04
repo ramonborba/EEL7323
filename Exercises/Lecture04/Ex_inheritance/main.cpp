@@ -20,6 +20,7 @@ void pressEnterToContinue();
 
 int main(){
     reg_aluno reg_alunos;
+    reg_prof reg_profs;
 
     bool sair = false;
     int op = -1;
@@ -82,22 +83,27 @@ int main(){
             break;
         
         case 8:
+            reg_profs.incluir_professor();
             pressEnterToContinue();
             break;
         
         case 9:
+            reg_profs.exclui_professor();
             pressEnterToContinue();
             break;
         
         case 10:
+            reg_profs.mod_professor();
             pressEnterToContinue();
             break;
         
         case 11:
+            reg_profs.consulta_professor();
             pressEnterToContinue();
             break;
         
         case 12:
+            reg_profs.lista_professores();
             pressEnterToContinue();
             break;
         
