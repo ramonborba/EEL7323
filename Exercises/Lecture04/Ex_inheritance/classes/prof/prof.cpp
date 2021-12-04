@@ -64,19 +64,23 @@ void Professor::mod_password(){
     }
 }
 
-void Professor::delete_password(){
+int Professor::delete_password(){
     string cur_pswd;
+    int success = 0;
     
     cout << "Digite senha atual: " << endl;
     cin >> cur_pswd;
     if (check_password(cur_pswd))
     {
         set_password();
+        success = 1;
     }
     else
     {
         cout << "Senha incorreta" << endl;
+        success = 0;
     }
+    return success;
 }
 
 

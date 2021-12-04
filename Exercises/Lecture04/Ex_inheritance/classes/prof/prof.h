@@ -24,7 +24,7 @@ class Professor: public Pessoa {
         int get_prof_id();
         std::string get_password();
         void mod_password();
-        void delete_password();
+        int delete_password();
         bool check_password(std::string);
 };
 

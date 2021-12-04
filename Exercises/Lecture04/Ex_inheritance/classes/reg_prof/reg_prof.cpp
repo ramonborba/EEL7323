@@ -48,8 +48,7 @@ void reg_prof::incluir_professor(){
         }
     }
 
-    //IMPLEMENTAR SENHA
-    //Cadastra ID do novo professor
+    //Cadastra novo professor
     if (slot != -1)
     {
         professor[slot].set_prof_id(new_id);
@@ -60,9 +59,10 @@ void reg_prof::incluir_professor(){
 
 void reg_prof::mod_professor(int req_id){
     string nome;
+    char mod_senha;
     int mo, day, yr;
 
-    //IMPLEMENTAR SENHA
+
 
     if (req_id == -1)
     {
@@ -78,13 +78,14 @@ void reg_prof::mod_professor(int req_id){
     {
         if (req_id == professor[i].get_prof_id())
         {
-            //Modifica informações
+            //Modifica nome
             cout << endl << "Nome do professor ( digite -1 para nao modificar)" << endl;
             nome = pede_nome();
             if (nome != "-1")
             {
                 professor[i].set_nome(nome);
             } 
+            //Modifica data de nascimento
             cout << endl << "Data de nascimento ( digite -1 para nao modificar)" << endl;
             pede_birth(mo, day, yr);
             if ((mo != -1) && (day != -1) && (yr != -1))
@@ -92,6 +93,14 @@ void reg_prof::mod_professor(int req_id){
                 professor[i].set_birth(mo, day, yr);
             } 
             return;
+
+            //Modifica senha
+            cout << endl << "Modificar senha (s:n)? " << endl;
+            cin >> mod_senha;
+            if (mod_senha == 's')
+            {
+                professor[i].mod_password();
+            }
         }
         else if (i == (N_PROFS-1))
         {
@@ -111,20 +120,20 @@ void reg_prof::exclui_professor(){
     {
         if (req_id == professor[i].get_prof_id())
         {
-            // IMPLEMENTAR SENHA
-            professor[i].set_prof_id();
-            // professor[i].delete_password(pswd);
-            professor[i].set_nome();
-            professor[i].set_birth();
-            cout << "Professor removido" << endl;
-            return;   
+            if (professor[i].delete_password())
+            {
+                professor[i].set_prof_id();
+                professor[i].set_nome();
+                professor[i].set_birth();
+                cout << "Professor removido" << endl;
+                return;       
+            } 
         }
         else if (i == (N_PROFS-1))
         {
             cout << "Matricula nao encontrada" << endl;
             return;
         }
-
     }
 }
 
