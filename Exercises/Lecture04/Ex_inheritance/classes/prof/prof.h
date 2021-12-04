@@ -15,13 +15,17 @@
 
 class Professor: public Pessoa {
         int prof_id;
+        bool pswd_is_set;
         std::string password;
+        void set_password(std::string = "");
     public:
         Professor();
         void set_prof_id(int = -1);
-        void set_password(std::string = "");
         int get_prof_id();
         std::string get_password();
+        void mod_password();
+        void delete_password();
+        bool check_password(std::string);
 };
 
 #endif /* _PROF_H_ */
