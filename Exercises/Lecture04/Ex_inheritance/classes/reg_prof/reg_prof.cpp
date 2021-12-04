@@ -92,7 +92,6 @@ void reg_prof::mod_professor(int req_id){
             {
                 professor[i].set_birth(mo, day, yr);
             } 
-            return;
 
             //Modifica senha
             cout << endl << "Modificar senha (s:n)? " << endl;
@@ -101,6 +100,7 @@ void reg_prof::mod_professor(int req_id){
             {
                 professor[i].mod_password();
             }
+            return;
         }
         else if (i == (N_PROFS-1))
         {
@@ -174,7 +174,7 @@ void reg_prof::lista_professores(){
         cout    << "Professor " << (i+1) << ":" << endl ;
         cout    << "- ID        : " << setw(5) << setfill('0') << professor[i].get_prof_id() << endl
                 << "- Nome      : " << professor[i].get_nome() << endl
-                << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl;
+                << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl << endl;
     }
     
 }

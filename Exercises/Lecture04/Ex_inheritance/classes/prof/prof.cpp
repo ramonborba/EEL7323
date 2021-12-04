@@ -15,9 +15,9 @@ using namespace std;
 
 //Membros da classe professor
 Professor::Professor() : Pessoa() {
-    pswd_is_set = false;
     set_prof_id();
     set_password();
+    pswd_is_set = false;
 }
 
 void Professor::set_prof_id(int new_id){
@@ -73,6 +73,7 @@ int Professor::delete_password(){
     if (check_password(cur_pswd))
     {
         set_password();
+        pswd_is_set = false;
         success = 1;
     }
     else
