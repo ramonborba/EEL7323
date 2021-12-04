@@ -8,7 +8,12 @@
 #include <iostream>
 using namespace std;
 
-#include "classes/reg_aluno/reg_aluno.h"
+#include "./classes/clk_cal/calendar.cpp"
+#include "./classes/pessoa/pessoa.cpp"
+#include "./classes/aluno/aluno.cpp"
+#include "./classes/reg_aluno/reg_aluno.cpp"
+#include "./classes/prof/prof.cpp"
+#include "./classes/reg_prof/reg_prof.cpp"
 
 
 void pressEnterToContinue();
