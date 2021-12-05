@@ -10,10 +10,17 @@
 
 #define N_PROFS 20
 
+struct User
+{
+    Professor active_user;
+    bool logged_in = false;
+};
+
 class reg_prof {
         Professor professor[N_PROFS];
+        User usr;
         int pede_id();
-        float pede_password();
+        std::string pede_password();
         std::string pede_nome();
         void pede_birth(int&, int&, int&);
     public:
@@ -22,4 +29,8 @@ class reg_prof {
         void exclui_professor();
         void consulta_professor();
         void lista_professores();
+        void usr_login();
+        void usr_logout();
+        void usr_show();
+        bool usr_check_login();
 };

@@ -179,6 +179,79 @@ void reg_prof::lista_professores(){
     
 }
 
+void reg_prof::usr_show(){
+    int mo, day, yr;
+    if (usr.logged_in)
+    {    
+        usr.active_user.get_birth(mo, day, yr);
+        cout << "Usuario ativo:" << endl;
+        cout    << "- ID        : " << setw(5) << setfill('0') << usr.active_user.get_prof_id() << endl
+                << "- Nome      : " << usr.active_user.get_nome() << endl
+                << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl;
+    }
+    else
+    {
+        cout << "Nenhum usuário ativo" << endl;
+    }
+    return;
+}
+
+void reg_prof::usr_login(){
+    int req_id;
+    string pswd;
+
+    if (!usr.logged_in)
+    {
+        req_id = pede_id();
+        for (int i = 0; i < N_PROFS; i++)
+        {
+            if (req_id = professor[i].get_prof_id())
+            {
+                pswd = pede_password();
+                if (professor[i].check_password(pswd))
+                {
+                    usr.active_user = professor[i];
+                    usr.logged_in = true;
+                }
+                else
+                {
+                    cout << "Senha incorreta" << endl;
+                }           
+            }
+            else if (i == (N_PROFS-1))
+            {
+                cout << "ID nao encontrado" << endl;
+            }
+        }
+    }
+    else
+    {
+        cout << "Ja existe um usuário ativo" << endl << endl;
+    }
+    return;
+}
+
+
+void reg_prof::usr_logout(){
+    int req_id;
+    Professor null_prof;
+
+    if (usr.logged_in)
+    {
+        usr.logged_in = false;
+        usr.active_user = null_prof;
+    }
+    else
+    {
+        cout << "Nenhum usuário ativo" << endl << endl;
+    }
+    return;
+}
+
+bool reg_prof::usr_check_login(){
+    return usr.logged_in;
+}
+
 int reg_prof::pede_id(){
     int req_id;
     //Pede numero de id
@@ -214,4 +287,13 @@ void reg_prof::pede_birth(int& mo, int& day, int& yr){
     cin >> mo;
     cout << "Digite o ano: ";
     cin >> yr;
+}
+
+string reg_prof::pede_password(){
+    string pswd;
+    
+    cout << "Digite a senha: ";
+    cin >> pswd;
+    cout << endl;
+    return pswd;
 }
