@@ -24,6 +24,7 @@ int main(){
 
     bool sair = false;
     int op = -1;
+    char resp;
     
     system("clear");
     while (!sair)
@@ -43,67 +44,158 @@ int main(){
         cout << "   10 - Alterar Professor" << endl;
         cout << "   11 - Consultar Professor" << endl;
         cout << "   12 - Listar Professores" << endl;
+        cout << "   13 - Usuario Ativo" << endl;
         cout << "    0 - Sair do programa" << endl;
         cout << endl << "Escolha a operacao: ";
-        cin >> op;
+        cin >> op; cout << endl;
 
         switch (op)
         {
         case 1:
+            if (!reg_profs.vazio())
+            {
+                reg_profs.usr_login();
+            }
+            else
+            {
+                cout << "Nenhum professor cadastrado." << endl;
+                cout << "Deseja cadastrar novo professor agora (s:n)?";
+                cin >> resp; cout << endl << endl;
+                if (resp == 's')
+                {
+                    reg_profs.incluir_professor();
+                }
+            }
             pressEnterToContinue();
             break;
         
         case 2:
+            reg_profs.usr_logout();
             pressEnterToContinue();
             break;
         
         case 3:
-            reg_alunos.incluir_aluno();
+            if (reg_profs.usr_check_login())
+            {
+                reg_alunos.incluir_aluno();
+            }
+            else
+            {
+                cout << "Faça login primeiro" << endl << endl;
+            }
             pressEnterToContinue();
             break;
         
         case 4:
-            reg_alunos.exclui_aluno();
+            if (reg_profs.usr_check_login())
+            {
+                reg_alunos.exclui_aluno();
+            }
+            else
+            {
+                cout << "Faça login primeiro" << endl << endl;
+            }
             pressEnterToContinue();
             break;
         
         case 5:
-            reg_alunos.mod_aluno();
+            if (reg_profs.usr_check_login())
+            {
+                reg_alunos.mod_aluno();
+            }
+            else
+            {
+                cout << "Faça login primeiro" << endl << endl;
+            }
             pressEnterToContinue();
             break;
         
         case 6:
-            reg_alunos.consulta_aluno();
+            if (reg_profs.usr_check_login())
+            {
+                reg_alunos.consulta_aluno();
+            }
+            else
+            {
+                cout << "Faça login primeiro" << endl << endl;
+            }
             pressEnterToContinue();
             break;
         
         case 7:
-            reg_alunos.lista_alunos();
+            if (reg_profs.usr_check_login())
+            {
+                reg_alunos.lista_alunos();
+            }
+            else
+            {
+                cout << "Faça login primeiro" << endl << endl;
+            }
             pressEnterToContinue();
             break;
         
         case 8:
-            reg_profs.incluir_professor();
+            if (reg_profs.usr_check_login())
+            {
+                reg_profs.incluir_professor();
+            }
+            else
+            {
+                cout << "Faça login primeiro" << endl << endl;
+            }
             pressEnterToContinue();
             break;
         
         case 9:
-            reg_profs.exclui_professor();
+            if (reg_profs.usr_check_login())
+            {
+                reg_profs.exclui_professor();
+            }
+            else
+            {
+                cout << "Faça login primeiro" << endl << endl;
+            }
             pressEnterToContinue();
             break;
         
         case 10:
-            reg_profs.mod_professor();
+            if (reg_profs.usr_check_login())
+            {
+                reg_profs.mod_professor();
+            }
+            else
+            {
+                cout << "Faça login primeiro" << endl << endl;
+            }
             pressEnterToContinue();
             break;
         
         case 11:
-            reg_profs.consulta_professor();
+            if (reg_profs.usr_check_login())
+            {
+                reg_profs.consulta_professor();
+            }
+            else
+            {
+                cout << "Faça login primeiro" << endl << endl;
+            }
             pressEnterToContinue();
             break;
         
         case 12:
-            reg_profs.lista_professores();
+            if (reg_profs.usr_check_login())
+            {
+                reg_profs.lista_professores();
+            }
+            else
+            {
+                cout << "Faça login primeiro" << endl << endl;
+            }
+            pressEnterToContinue();
+            break;
+        
+        case 13:
+            reg_profs.usr_show();
             pressEnterToContinue();
             break;
         
