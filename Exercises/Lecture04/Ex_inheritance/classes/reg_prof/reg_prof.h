@@ -33,4 +33,5 @@ class reg_prof {
         void usr_logout();
         void usr_show();
         bool usr_check_login();
+        bool vazio();
 };

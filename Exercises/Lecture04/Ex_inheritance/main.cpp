@@ -31,8 +31,13 @@ int main(){
     {       
         cout << "Sistema de registro de alunos e professores:" << endl;
         cout << endl;
-        cout << "-Indice de operacoes:" << endl;
-        cout << "    1 - Login" << endl;
+        cout << "-Indice de operacoes:" << endl << endl;
+        if (!reg_profs.usr_check_login())
+        {
+            cout << "    1 - Login" << endl;
+        }
+        else
+        {
         cout << "    2 - Logout" << endl;
         cout << "    3 - Incluir Aluno" << endl;
         cout << "    4 - Excluir Aluno" << endl;
@@ -46,6 +51,7 @@ int main(){
         cout << "   12 - Listar Professores" << endl;
         cout << "   13 - Usuario Ativo" << endl;
         cout << "    0 - Sair do programa" << endl;
+        }
         cout << endl << "Escolha a operacao: ";
         cin >> op; cout << endl;
 
@@ -60,7 +66,7 @@ int main(){
             {
                 cout << "Nenhum professor cadastrado." << endl;
                 cout << "Deseja cadastrar novo professor agora (s:n)?";
-                cin >> resp; cout << endl << endl;
+                cin >> resp; cout << endl;
                 if (resp == 's')
                 {
                     reg_profs.incluir_professor();

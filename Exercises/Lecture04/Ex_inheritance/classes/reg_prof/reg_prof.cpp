@@ -94,11 +94,18 @@ void reg_prof::mod_professor(int req_id){
             } 
 
             //Modifica senha
-            cout << endl << "Modificar senha (s:n)? " << endl;
-            cin >> mod_senha;
-            if (mod_senha == 's')
+            if (!professor[i].pswd_is_set)
             {
                 professor[i].mod_password();
+            }
+            else
+            {
+                cout << endl << "Modificar senha (s:n)? " << endl;
+                cin >> mod_senha;
+                if (mod_senha == 's')
+                {
+                    professor[i].mod_password();
+                }
             }
             return;
         }
@@ -205,17 +212,19 @@ void reg_prof::usr_login(){
         req_id = pede_id();
         for (int i = 0; i < N_PROFS; i++)
         {
-            if (req_id = professor[i].get_prof_id())
+            if (req_id == professor[i].get_prof_id())
             {
                 pswd = pede_password();
                 if (professor[i].check_password(pswd))
                 {
                     usr.active_user = professor[i];
                     usr.logged_in = true;
+                    return;
                 }
                 else
                 {
                     cout << "Senha incorreta" << endl;
+                    return;
                 }           
             }
             else if (i == (N_PROFS-1))
@@ -250,6 +259,16 @@ void reg_prof::usr_logout(){
 
 bool reg_prof::usr_check_login(){
     return usr.logged_in;
+}
+
+bool reg_prof::vazio(){
+    for (int i = 0; i < N_PROFS; i++){
+        if (professor[i].get_prof_id() != -1)
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 int reg_prof::pede_id(){
