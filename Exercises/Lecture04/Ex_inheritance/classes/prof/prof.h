@@ -17,7 +17,7 @@ class Professor: public Pessoa {
         int prof_id;
         bool pswd_is_set;
         std::string password;
-        void set_password(std::string = " ");
+        void set_password(std::string = "stdpswd");
     public:
         Professor();
         void set_prof_id(int = -1);
