@@ -177,11 +177,14 @@ void reg_prof::lista_professores(){
 
     for (int i = 0; i < N_PROFS; i++)
     {
-        professor[i].get_birth(mo, day, yr);
-        cout    << "Professor " << (i+1) << ":" << endl ;
-        cout    << "- ID        : " << setw(5) << setfill('0') << professor[i].get_prof_id() << endl
-                << "- Nome      : " << professor[i].get_nome() << endl
-                << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl << endl;
+        if (professor[i].get_prof_id() != -1)
+        {
+            professor[i].get_birth(mo, day, yr);
+            cout    << "Professor " << (i+1) << ":" << endl ;
+            cout    << "- ID        : " << setw(5) << setfill('0') << professor[i].get_prof_id() << endl
+                    << "- Nome      : " << professor[i].get_nome() << endl
+                    << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl << endl;
+        }
     }
     
 }

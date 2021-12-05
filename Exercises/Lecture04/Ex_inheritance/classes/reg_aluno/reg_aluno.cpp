@@ -176,14 +176,17 @@ void reg_aluno::lista_alunos(){
 
     for (int i = 0; i < N_ALUNOS; i++)
     {
-        aluno[i].get_birth(mo, day, yr);
-        cout    << "Aluno " << (i+1) << ":" << endl ;
-        cout    << "- Matricula : " << setw(5) << setfill('0') << aluno[i].get_matricula() << endl
-                << "- Nome      : " << aluno[i].get_nome() << endl
-                << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl
-                << "- Nota 1    : " << aluno[i].get_nota(1) << endl
-                << "- Nota 2    : " << aluno[i].get_nota(2) << endl
-                << "- Media     : " << aluno[i].get_media() << endl << endl;
+        if (aluno[i].get_matricula() != -1)
+        {
+            aluno[i].get_birth(mo, day, yr);
+            cout    << "Aluno " << (i+1) << ":" << endl ;
+            cout    << "- Matricula : " << setw(5) << setfill('0') << aluno[i].get_matricula() << endl
+                    << "- Nome      : " << aluno[i].get_nome() << endl
+                    << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl
+                    << "- Nota 1    : " << aluno[i].get_nota(1) << endl
+                    << "- Nota 2    : " << aluno[i].get_nota(2) << endl
+                    << "- Media     : " << aluno[i].get_media() << endl << endl;
+        }        
     }
     
 }
