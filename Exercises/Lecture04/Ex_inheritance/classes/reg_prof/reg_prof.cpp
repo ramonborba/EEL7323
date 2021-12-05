@@ -53,7 +53,7 @@ void reg_prof::incluir_professor(){
     {
         professor[slot].set_prof_id(new_id);
         mod_professor(new_id);
-        cout << "Professor cadastrado com sucesso" << endl;
+        cout << endl << "Professor cadastrado com sucesso" << endl;
     } 
 }
 
@@ -101,7 +101,7 @@ void reg_prof::mod_professor(int req_id){
             else
             {
                 cout << endl << "Modificar senha (s:n)? " << endl;
-                cin >> mod_senha;
+                cin >> mod_senha; cout << endl;
                 if (mod_senha == 's')
                 {
                     professor[i].mod_password();
@@ -219,6 +219,7 @@ void reg_prof::usr_login(){
                 {
                     usr.active_user = professor[i];
                     usr.logged_in = true;
+                    cout << endl << "Login efetuado" << endl;
                     return;
                 }
                 else
@@ -249,6 +250,7 @@ void reg_prof::usr_logout(){
     {
         usr.logged_in = false;
         usr.active_user = null_prof;
+        cout << endl << "Logout efetuado" << endl;
     }
     else
     {
