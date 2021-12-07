@@ -65,7 +65,7 @@ int main(){
             else
             {
                 cout << "Nenhum professor cadastrado." << endl;
-                cout << "Deseja cadastrar novo professor agora (s:n)?";
+                cout << "Deseja cadastrar novo professor agora (s:n)? ";
                 cin >> resp; cout << endl;
                 if (resp == 's')
                 {
@@ -87,7 +87,7 @@ int main(){
             }
             else
             {
-                cout << "Faça login primeiro" << endl << endl;
+                cout << "Nenhum usuario ativo" << endl << endl;
             }
             pressEnterToContinue();
             break;
@@ -99,7 +99,7 @@ int main(){
             }
             else
             {
-                cout << "Faça login primeiro" << endl << endl;
+                cout << "Nenhum usuario ativo" << endl << endl;
             }
             pressEnterToContinue();
             break;
@@ -111,7 +111,7 @@ int main(){
             }
             else
             {
-                cout << "Faça login primeiro" << endl << endl;
+                cout << "Nenhum usuario ativo" << endl << endl;
             }
             pressEnterToContinue();
             break;
@@ -123,7 +123,7 @@ int main(){
             }
             else
             {
-                cout << "Faça login primeiro" << endl << endl;
+                cout << "Nenhum usuario ativo" << endl << endl;
             }
             pressEnterToContinue();
             break;
@@ -135,7 +135,7 @@ int main(){
             }
             else
             {
-                cout << "Faça login primeiro" << endl << endl;
+                cout << "Nenhum usuario ativo" << endl << endl;
             }
             pressEnterToContinue();
             break;
@@ -147,7 +147,7 @@ int main(){
             }
             else
             {
-                cout << "Faça login primeiro" << endl << endl;
+                cout << "Nenhum usuario ativo" << endl << endl;
             }
             pressEnterToContinue();
             break;
@@ -159,7 +159,7 @@ int main(){
             }
             else
             {
-                cout << "Faça login primeiro" << endl << endl;
+                cout << "Nenhum usuario ativo" << endl << endl;
             }
             pressEnterToContinue();
             break;
@@ -171,7 +171,7 @@ int main(){
             }
             else
             {
-                cout << "Faça login primeiro" << endl << endl;
+                cout << "Nenhum usuario ativo" << endl << endl;
             }
             pressEnterToContinue();
             break;
@@ -183,7 +183,7 @@ int main(){
             }
             else
             {
-                cout << "Faça login primeiro" << endl << endl;
+                cout << "Nenhum usuario ativo" << endl << endl;
             }
             pressEnterToContinue();
             break;
@@ -195,7 +195,7 @@ int main(){
             }
             else
             {
-                cout << "Faça login primeiro" << endl << endl;
+                cout << "Nenhum usuario ativo" << endl << endl;
             }
             pressEnterToContinue();
             break;
