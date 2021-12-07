@@ -53,7 +53,7 @@ void reg_prof::incluir_professor(){
     {
         professor[slot].set_prof_id(new_id);
         mod_professor(new_id);
-        cout << "Professor cadastrado com sucesso" << endl;
+        cout << endl << "Professor cadastrado com sucesso" << endl;
     } 
 }
 
@@ -94,11 +94,18 @@ void reg_prof::mod_professor(int req_id){
             } 
 
             //Modifica senha
-            cout << endl << "Modificar senha (s:n)? " << endl;
-            cin >> mod_senha;
-            if (mod_senha == 's')
+            if (!professor[i].pswd_is_set)
             {
                 professor[i].mod_password();
+            }
+            else
+            {
+                cout << endl << "Modificar senha (s:n)? " << endl;
+                cin >> mod_senha; cout << endl;
+                if (mod_senha == 's')
+                {
+                    professor[i].mod_password();
+                }
             }
             return;
         }
@@ -170,13 +177,103 @@ void reg_prof::lista_professores(){
 
     for (int i = 0; i < N_PROFS; i++)
     {
-        professor[i].get_birth(mo, day, yr);
-        cout    << "Professor " << (i+1) << ":" << endl ;
-        cout    << "- ID        : " << setw(5) << setfill('0') << professor[i].get_prof_id() << endl
-                << "- Nome      : " << professor[i].get_nome() << endl
-                << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl << endl;
+        if (professor[i].get_prof_id() != -1)
+        {
+            professor[i].get_birth(mo, day, yr);
+            cout    << "Professor " << (i+1) << ":" << endl ;
+            cout    << "- ID        : " << setw(5) << setfill('0') << professor[i].get_prof_id() << endl
+                    << "- Nome      : " << professor[i].get_nome() << endl
+                    << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl << endl;
+        }
     }
     
+}
+
+void reg_prof::usr_show(){
+    int mo, day, yr;
+    if (usr.logged_in)
+    {    
+        usr.active_user.get_birth(mo, day, yr);
+        cout << "Usuario ativo:" << endl;
+        cout    << "- ID        : " << setw(5) << setfill('0') << usr.active_user.get_prof_id() << endl
+                << "- Nome      : " << usr.active_user.get_nome() << endl
+                << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl;
+    }
+    else
+    {
+        cout << "Nenhum usuário ativo" << endl;
+    }
+    return;
+}
+
+void reg_prof::usr_login(){
+    int req_id;
+    string pswd;
+
+    if (!usr.logged_in)
+    {
+        req_id = pede_id();
+        for (int i = 0; i < N_PROFS; i++)
+        {
+            if (req_id == professor[i].get_prof_id())
+            {
+                pswd = pede_password();
+                if (professor[i].check_password(pswd))
+                {
+                    usr.active_user = professor[i];
+                    usr.logged_in = true;
+                    cout << endl << "Login efetuado" << endl;
+                    return;
+                }
+                else
+                {
+                    cout << "Senha incorreta" << endl;
+                    return;
+                }           
+            }
+            else if (i == (N_PROFS-1))
+            {
+                cout << "ID nao encontrado" << endl;
+            }
+        }
+    }
+    else
+    {
+        cout << "Ja existe um usuário ativo" << endl << endl;
+    }
+    return;
+}
+
+
+void reg_prof::usr_logout(){
+    int req_id;
+    Professor null_prof;
+
+    if (usr.logged_in)
+    {
+        usr.logged_in = false;
+        usr.active_user = null_prof;
+        cout << endl << "Logout efetuado" << endl;
+    }
+    else
+    {
+        cout << "Nenhum usuário ativo" << endl << endl;
+    }
+    return;
+}
+
+bool reg_prof::usr_check_login(){
+    return usr.logged_in;
+}
+
+bool reg_prof::vazio(){
+    for (int i = 0; i < N_PROFS; i++){
+        if (professor[i].get_prof_id() != -1)
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 int reg_prof::pede_id(){
@@ -214,4 +311,13 @@ void reg_prof::pede_birth(int& mo, int& day, int& yr){
     cin >> mo;
     cout << "Digite o ano: ";
     cin >> yr;
+}
+
+string reg_prof::pede_password(){
+    string pswd;
+    
+    cout << "Digite a senha: ";
+    cin >> pswd;
+    cout << endl;
+    return pswd;
 }
