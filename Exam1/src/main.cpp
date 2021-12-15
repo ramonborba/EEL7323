@@ -15,25 +15,28 @@ int main(){
     bool sair = false;
     int op = -1;
     
-    system("clear");
     while (!sair)
-    {       
-        cout << "Sistema de registro de alunos e professores:" << endl;
+    {   
+        cout << endl;   
+        cout << "------------------------------------------------------------" << endl;
+        cout << endl;   
+        cout << "Sistema de gerenciamento de dados de sendores:" << endl;
         cout << endl;
         cout << "-Indice de operacoes:" << endl;
-        cout << "    1 - Login" << endl;
-        cout << "    2 - Logout" << endl;
-        cout << "    3 - Incluir Aluno" << endl;
-        cout << "    4 - Excluir Aluno" << endl;
-        cout << "    5 - Alterar Aluno" << endl;
-        cout << "    6 - Consultar Aluno" << endl;
-        cout << "    7 - Listar Alunos" << endl;
-        cout << "    8 - Incluir Professor" << endl;
-        cout << "    9 - Excluir Professor" << endl;
-        cout << "   10 - Alterar Professor" << endl;
-        cout << "   11 - Consultar Professor" << endl;
-        cout << "   12 - Listar Professores" << endl;
-        cout << "    0 - Sair do programa" << endl;
+        cout << endl;
+        cout << "   Sensor de Temperatura:" << endl;
+        cout << "   1 - Leitura de sensor de temperatura" << endl;
+        cout << "   2 - Excluir temperatura" << endl;
+        cout << "   3 - Consultar determinada temperatura" << endl;
+        cout << "   4 - Listar todas as temperaturas" << endl;
+        cout << endl;
+        cout << "   Sensor de Pressao:" << endl;
+        cout << "   5 - Leitura de sensor de pressao" << endl;
+        cout << "   6 - Excluir pressao" << endl;
+        cout << "   7 - Consultar determinada pressao" << endl;
+        cout << "   8 - Listar todas as pressoes" << endl;
+        cout << endl;
+        cout << "   0 - Sair do programa" << endl;
         cout << endl << "Escolha a operacao: ";
         cin >> op;
 
@@ -71,29 +74,12 @@ int main(){
             pressEnterToContinue();
             break;
         
-        case 9:
-            pressEnterToContinue();
-            break;
-        
-        case 10:
-            pressEnterToContinue();
-            break;
-        
-        case 11:
-            pressEnterToContinue();
-            break;
-        
-        case 12:
-            pressEnterToContinue();
-            break;
-        
         case 0:
             sair = true;
-            system("clear");
             break;
         
         default:
-            cout << "Operação invalida" << endl;
+            cout << endl << "Operação invalida" << endl;
             pressEnterToContinue();
             break;
         }
@@ -107,5 +93,4 @@ void pressEnterToContinue(){
     cout << endl << "Pressione 'Enter' para continuar.";
     cin.ignore();
     cin.get();
-    system("clear");
 }
