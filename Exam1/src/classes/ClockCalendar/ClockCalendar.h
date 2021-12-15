@@ -8,8 +8,8 @@
 #ifndef _CLK_CAL_H
 #define _CLK_CAL_H
 
-#include "clock.h"
-#include "calendar.h"
+#include "Clock.h"
+#include "Calendar.h"
 
 //ClockCalendar class
 class ClockCalendar : public Clock, public Calendar {

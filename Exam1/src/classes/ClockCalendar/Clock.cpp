@@ -5,7 +5,7 @@
  * File: clock.cpp
  * Description: Inheritance exercise - Student/Professor Registry
  */
-#include "clock.h"
+#include "Clock.h"
 
 //Clock class members
 Clock::Clock(int h, int m, int s, bool pm){

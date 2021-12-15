@@ -17,6 +17,12 @@
 //                  pelo menos uma funcao virtual pura.
 //
 
+// MODIFICACOES:
+// Adicionados include guards
+
+#ifndef _SENSOR_H_
+#define _SENSOR_H_
+
 class Sensor {
 	    int identificacao;
 	    float valor;
@@ -27,3 +33,5 @@ class Sensor {
 		void setValor(float);
 		virtual void readSensor() = 0;		// funcao virtual pura
 };
+
+#endif /* _SENSOR_H_ */

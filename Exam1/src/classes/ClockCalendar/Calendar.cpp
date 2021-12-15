@@ -5,7 +5,7 @@
  * File: calendar.cpp
  * Description: Inheritance exercise - Student/Professor Registry
  */
-#include "calendar.h"
+#include "Calendar.h"
 
 //Calendar class members
 Calendar::Calendar(){
