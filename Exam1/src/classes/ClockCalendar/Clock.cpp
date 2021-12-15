@@ -1,13 +1,19 @@
 /**
  * Author: Ramon de Araujo Borba < ramonborba97@gmail.com >
  * Institution: UFSC
- * Date: 10/11/2021
- * File: clock.cpp
- * Description: Inheritance exercise - Student/Professor Registry
+ * Date: 15/12/2021
+ * File: Clock.cpp
  */
 #include "Clock.h"
 
 //Clock class members
+Clock::Clock(){
+    hr = 0;
+    min = 0;
+    sec = 0;
+    is_pm = 0;
+}
+
 Clock::Clock(int h, int m, int s, bool pm){
     hr = h;
     min = m;

@@ -1,9 +1,8 @@
 /**
  * Author: Ramon de Araujo Borba < ramonborba97@gmail.com >
  * Institution: UFSC
- * Date: 10/11/2021
- * File: calendar.h
- * Description: Inheritance exercise - Student/Professor Registry
+ * Date: 15/12/2021
+ * File: Calendar.h
  */
 #ifndef _CALENDAR_H_
 #define _CALENDAR_H_
