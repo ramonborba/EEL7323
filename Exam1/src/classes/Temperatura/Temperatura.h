@@ -27,7 +27,8 @@ class Temperatura : public Sensor {
 		float getTemp();
 		void setID(int newID);
 		int getID();
-		void printTimestamp(); 					//Testin purposes, may decite to keep it later
+		void printTimestamp();
+		void printData();
 };
 
 #endif /* _TEMPERATURA_H_ */
