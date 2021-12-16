@@ -24,7 +24,7 @@ class CadastroTemp {
     public:
         void newReading();
         void delReading();
-        void get_Reading();
+        void getReading(int reqID = -1);
         void listReadings();
 };
 

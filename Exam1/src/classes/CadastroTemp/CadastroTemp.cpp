@@ -49,7 +49,7 @@ void CadastroTemp::newReading(){
         tempReading[slot].temp.readSensor();
         tempReading[slot].valid = true;
         cout << "Leitura cadastrada: " << endl;
-        // Show new reading -- use getReading()
+        getReading(newID);
     } 
 }
 
@@ -59,14 +59,14 @@ void CadastroTemp::delReading(){
     // Search for ID
     for (int i = 0; i < N_TEMP_READINGS; i++)
     {
-        if (reqID == tempReading[i].temp.getID())
+        if (reqID == tempReading[i].temp.getID())           // Reset values if if is found
         {
             tempReading[i].valid = false;
             tempReading[i].temp = Temperatura();
             cout << "Leitura removida" << endl;
             return;   
         }
-        else if (i == (N_TEMP_READINGS-1))
+        else if (i == (N_TEMP_READINGS-1))                  // Return if ID not found
         {
             cout << "ID não encontrado" << endl;
             return;
@@ -74,7 +74,28 @@ void CadastroTemp::delReading(){
     }
 }
 
-void CadastroTemp::get_Reading(){}
+void CadastroTemp::getReading(int reqID = -1){
+    if (reqID == -1)
+    {
+        int reqID = requestID();
+    }   
+    
+    // Search for ID
+    for (int i = 0; i < N_TEMP_READINGS; i++)
+    {
+        if (reqID == tempReading[i].temp.getID())               // Print data for requested ID if found
+        {
+            cout << endl << "Leitura " << i+1 << ":" << endl;
+            tempReading[i].temp.printData();
+            return;   
+        }
+        else if (i == (N_TEMP_READINGS-1))                      // Return if ID not found
+        {
+            cout << "ID nao encontrado" << endl;
+            return;
+        }
+    }
+}
 
 void CadastroTemp::listReadings(){}
 
@@ -86,7 +107,7 @@ int CadastroTemp::requestID(){
     {
         cout << endl << "Digite o ID da leitura: ";
         cin >> newID;
-        if (cin.fail())
+        if ( cin.fail() || (newID < 1) )
         {
             cin.clear();
             cin.ignore(1000, '\n');
