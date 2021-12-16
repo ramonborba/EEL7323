@@ -22,10 +22,11 @@
 class Temperatura : public Sensor {
 	    ClockCalendar dataHora;
 	public:										// Public methods for aggregation
-		float getTemp();
-		int getID();
-		void setID(int newID);
+		Temperatura();
 		void readSensor();
+		float getTemp();
+		void setID(int newID);
+		int getID();
 		void printTimestamp(); 					//Testin purposes, may decite to keep it later
 };
 

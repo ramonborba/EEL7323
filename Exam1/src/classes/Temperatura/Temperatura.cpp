@@ -11,9 +11,14 @@
  *
  */
 
-#include "Temperatura.h" 
 #include <cstdlib>   // para usar srand() e rand()
 #include <ctime>     // para usar time()
+#include "Temperatura.h" 
+
+Temperatura::Temperatura(){
+	setValor(-1);
+	setID(-1);
+}
 
 void Temperatura::readSensor(){
 	float newTemp;
