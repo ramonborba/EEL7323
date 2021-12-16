@@ -14,7 +14,7 @@ using namespace std;
 void pressEnterToContinue();
 
 int main(){
-    bool sair = false;
+    bool validop = false, sair = false;
     int op = -1;
 
     CadastroTemp cadTemp;
@@ -44,6 +44,12 @@ int main(){
         cout << "   0 - Sair do programa" << endl;
         cout << endl << "Escolha a operacao: ";
         cin >> op;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            op = -1;
+        }
         cout << endl;
         cout << "-------------------------------------------------------------" << endl;
 
@@ -94,7 +100,7 @@ int main(){
             break;
 
         default:
-            cout << endl << "Operação invalida" << endl;
+            cout << endl << "Operação invalida, tente novamente" << endl;
             pressEnterToContinue();
             break;
         }
