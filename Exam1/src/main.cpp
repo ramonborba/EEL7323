@@ -105,7 +105,7 @@ int main(){
 }
 
 void pressEnterToContinue(){
-    cout << endl << "Pressione 'Enter' para continuar.";
+    cout << endl << "Pressione 'Enter' para continuar";
     cin.ignore();
     cin.get();
 }

@@ -85,7 +85,7 @@ void CadastroTemp::getReading(int reqID){
     {
         if (reqID == tempReading[i].temp.getID())               // Print data for requested ID if found
         {
-            cout << endl << "Leitura " << i+1 << ":" << endl;
+            cout << endl << "Leitura de Temperatura " << i+1 << ":" << endl;
             tempReading[i].temp.printData();
             return;   
         }

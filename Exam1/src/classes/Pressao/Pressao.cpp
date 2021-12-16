@@ -44,7 +44,7 @@ void Pressao::setID(int newID){
 
 void Pressao::printData(){
 	std::cout	<< "  -ID			: " << getID() << std::endl
-         		<< "  -Valor		: " << getValor() << std::endl
+         		<< "  -Valor		: " << getValor() << " ATM" << std::endl
         		<< "  -Data - Hora		: "; dataHora.printClkCal() ;
 		 std::cout << std::endl;
 }

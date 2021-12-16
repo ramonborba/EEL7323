@@ -84,7 +84,7 @@ void CadastroPressao::getReading(int reqID){
     {
         if (reqID == pressureReading[i].pressure.getID())               // Print data for requested ID if found
         {
-            cout << endl << "Leitura " << i+1 << ":" << endl;
+            cout << endl << "Leitura de Pressao " << i+1 << ":" << endl;
             pressureReading[i].pressure.printData();
             return;   
         }
@@ -97,7 +97,7 @@ void CadastroPressao::getReading(int reqID){
 }
 
 void CadastroPressao::listReadings(){
-    cout << endl << "Leituras de Temperatura: " << endl;
+    cout << endl << "Leituras de Pressao: " << endl;
     for (int i = 0; i < N_PRESSURE_READINGS; i++)
     {
         if (pressureReading[i].valid)                               // Print valid readings
