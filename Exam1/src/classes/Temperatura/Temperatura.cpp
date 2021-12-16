@@ -51,6 +51,6 @@ void Temperatura::setID(int newID){
 void Temperatura::printData(){
 	std::cout	<< "  -ID			: " << getID() << std::endl
          		<< "  -Valor		: " << getValor() << std::endl
-        		<< "  -Data - Hora	: "; dataHora.printClkCal() ;
+        		<< "  -Data - Hora		: "; dataHora.printClkCal() ;
 		 std::cout << std::endl;
 }

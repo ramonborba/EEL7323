@@ -74,10 +74,10 @@ void CadastroTemp::delReading(){
     }
 }
 
-void CadastroTemp::getReading(int reqID = -1){
+void CadastroTemp::getReading(int reqID){
     if (reqID == -1)
     {
-        int reqID = requestID();
+        reqID = requestID();
     }   
     
     // Search for ID
@@ -103,9 +103,9 @@ void CadastroTemp::listReadings(){
     {
         if (tempReading[i].valid)                               // Print valid readings
         {
+            cout << endl;
             cout << "Leitura " << i+1 << ":" << endl;
             tempReading[i].temp.printData();
-            cout << endl;
         }
     }
     
@@ -118,7 +118,7 @@ int CadastroTemp::requestID(){
     do
     {
         cout << endl << "Digite o ID da leitura: ";
-        cin >> newID;
+        cin >> newID; cout << endl;
         if ( cin.fail() || (newID < 1) )
         {
             cin.clear();
