@@ -9,6 +9,7 @@
 using namespace std;
 
 #include "classes/CadastroTemp/CadastroTemp.h"
+#include "classes/CadastroPressao/CadastroPressao.h"
 
 void pressEnterToContinue();
 
@@ -17,6 +18,7 @@ int main(){
     int op = -1;
 
     CadastroTemp cadTemp;
+    CadastroPressao cadPressao;
 
     while (!sair)
     {
@@ -68,18 +70,22 @@ int main(){
             break;
 
         case 5:     // New pressure reading
+            cadPressao.newReading();
             pressEnterToContinue();
             break;
 
         case 6:     // Delete pressure reading
+            cadPressao.delReading();
             pressEnterToContinue();
             break;
 
         case 7:     // Consult pressure reading
+            cadPressao.getReading();
             pressEnterToContinue();
             break;
 
         case 8:     // List pressure reading
+            cadPressao.listReadings();
             pressEnterToContinue();
             break;
 
