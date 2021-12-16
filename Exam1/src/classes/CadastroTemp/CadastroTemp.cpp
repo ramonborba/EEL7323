@@ -24,7 +24,7 @@ void CadastroTemp::newReading(){
         }
         else if (i == (N_TEMP_READINGS-1))
         {
-            cout << "Nao ha espaco para novas leituras" << endl;
+            cout << endl << "Nao ha espaco para novas leituras" << endl;
             return;
         }
     }

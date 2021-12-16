@@ -13,13 +13,13 @@ using namespace std;
 void pressEnterToContinue();
 
 int main(){
-    bool validop = false, sair = false;
+    bool validop = false;
     int op = -1;
 
     CadastroTemp cadTemp;
     CadastroPressao cadPressao;
 
-    while (!sair)
+    while (true)
     {
         cout << endl;
         cout << "-------------------------------------------------------------" << endl;
@@ -40,8 +40,7 @@ int main(){
         cout << "       7 - Consultar determinada leitura" << endl;
         cout << "       8 - Listar todas as leituras" << endl;
         cout << endl;
-        cout << "   0 - Sair do programa" << endl;
-        cout << endl << "Escolha a operacao: ";
+        cout << "Escolha a operacao: ";
         cin >> op;
         if ( cin.fail() )
         {
@@ -92,10 +91,6 @@ int main(){
         case 8:     // List pressure reading
             cadPressao.listReadings();
             pressEnterToContinue();
-            break;
-
-        case 0:
-            sair = true;
             break;
 
         default:

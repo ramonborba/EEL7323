@@ -23,7 +23,7 @@ void CadastroPressao::newReading(){
         }
         else if (i == (N_PRESSURE_READINGS-1))
         {
-            cout << "Nao ha espaco para novas leituras" << endl;
+            cout << endl << "Nao ha espaco para novas leituras" << endl;
             return;
         }
     }
