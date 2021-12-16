@@ -59,11 +59,3 @@ void ClockCalendar::printClkCal(){
               << std::setw(2) << std::setfill('0') << hr << "h" << std::setw(2) << std::setfill('0') << min << "m" 
               << std::setw(2) << std::setfill('0') << sec << "s" << " " << (is_pm ? "PM":"AM") << std::endl;
 }
-
-// Testing
-int main(int argc, char const *argv[])
-{
-    ClockCalendar dateTime(time(nullptr));
-    dateTime.printClkCal();
-    return 0;
-}
