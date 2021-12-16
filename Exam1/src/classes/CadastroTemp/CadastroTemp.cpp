@@ -97,7 +97,19 @@ void CadastroTemp::getReading(int reqID = -1){
     }
 }
 
-void CadastroTemp::listReadings(){}
+void CadastroTemp::listReadings(){
+    cout << endl << "Leituras de Temperatura: " << endl;
+    for (int i = 0; i < N_TEMP_READINGS; i++)
+    {
+        if (tempReading[i].valid)                               // Print valid readings
+        {
+            cout << "Leitura " << i+1 << ":" << endl;
+            tempReading[i].temp.printData();
+            cout << endl;
+        }
+    }
+    
+}
 
 int CadastroTemp::requestID(){
     int newID;
