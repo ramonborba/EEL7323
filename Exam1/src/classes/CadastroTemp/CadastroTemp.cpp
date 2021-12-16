@@ -47,13 +47,32 @@ void CadastroTemp::newReading(){
     {
         tempReading[slot].temp.setID(newID);
         tempReading[slot].temp.readSensor();
-        tempReading[slot].valid=true;
+        tempReading[slot].valid = true;
         cout << "Leitura cadastrada: " << endl;
         // Show new reading -- use getReading()
     } 
 }
 
-void CadastroTemp::delReading(){}
+void CadastroTemp::delReading(){
+    int reqID = requestID();
+
+    // Search for ID
+    for (int i = 0; i < N_TEMP_READINGS; i++)
+    {
+        if (reqID == tempReading[i].temp.getID())
+        {
+            tempReading[i].valid = false;
+            tempReading[i].temp = Temperatura();
+            cout << "Leitura removida" << endl;
+            return;   
+        }
+        else if (i == (N_TEMP_READINGS-1))
+        {
+            cout << "ID não encontrado" << endl;
+            return;
+        }
+    }
+}
 
 void CadastroTemp::get_Reading(){}
 
