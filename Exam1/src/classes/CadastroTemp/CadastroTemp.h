@@ -1,9 +1,8 @@
 /**
  * Author: Ramon de Araujo Borba < ramonborba97@gmail.com >
  * Institution: UFSC
- * Date: 10/11/2021
- * File: reg_aluno.h
- * Description: Inheritance exercise - Student/Professor Registry
+ * Date: 15/12/2021
+ * File: CadastroTemp.h
  */
 #ifndef _CADASTROTEMP_H_
 #define _CADASTROTEMP_H_
