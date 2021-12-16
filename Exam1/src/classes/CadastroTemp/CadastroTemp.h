@@ -11,20 +11,20 @@
 
 #define N_TEMP_READINGS 20
 
-struct TempData
+struct TempData                                             // Struct for temperature data
 {
-    Temperatura temp;
-    bool valid = false;
+    Temperatura temp;                                       // Temperatura object
+    bool valid = false;                                     // Indicates if there is valid data stored
 };
 
 class CadastroTemp {
-        TempData tempReading[N_TEMP_READINGS];
-        int requestID();
+        TempData tempReading[N_TEMP_READINGS];              // Vector containing N_TEMP_READINGS values
+        int requestID();                                    // Requests ID value from user
     public:
-        void newReading();
-        void delReading();
-        void getReading(int reqID = -1);
-        void listReadings();
+        void newReading();                                  // Generates and stores a new reading
+        void delReading();                                  // Delete a reading base on it's ID
+        void getReading(int reqID = -1);                    // Consult a reading based on it's ID
+        void listReadings();                                // Lists all valid readings
 };
 
 #endif /* _CADASTROTEMP_H_ */

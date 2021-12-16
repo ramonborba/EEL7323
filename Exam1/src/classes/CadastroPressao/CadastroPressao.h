@@ -11,20 +11,20 @@
 
 #define N_PRESSURE_READINGS 20
 
-struct PressureData
+struct PressureData                                             // Struct for pressure data
 {
-    Pressao pressure;
-    bool valid = false;
+    Pressao pressure;                                           // Pressao object
+    bool valid = false;                                         // Indicates if there is valid data stored
 };
 
 class CadastroPressao {
-        PressureData pressureReading[N_PRESSURE_READINGS];
-        int requestID();
+        PressureData pressureReading[N_PRESSURE_READINGS];      // Vector containing N_PRESSURE_READINGS values
+        int requestID();                                        // Requests ID value from user
     public:
-        void newReading();
-        void delReading();
-        void getReading(int reqID = -1);
-        void listReadings();
+        void newReading();                                      // Generates and stores a new reading
+        void delReading();                                      // Delete a reading base on it's ID
+        void getReading(int reqID = -1);                        // Consult a reading based on it's ID
+        void listReadings();                                    // Lists all valid readings
 };
 
 #endif /* _CADASTROPRESSAO_H_ */

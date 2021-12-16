@@ -24,7 +24,6 @@ class Temperatura : public Sensor {
 	public:										// Public methods for aggregation
 		Temperatura();
 		void readSensor();
-		float getTemp();
 		void setID(int newID);
 		int getID();
 		void printTimestamp();

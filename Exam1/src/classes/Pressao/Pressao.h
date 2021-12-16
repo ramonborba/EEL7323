@@ -18,7 +18,6 @@ class Pressao : public Sensor {
 	public:										// Public methods for aggregation
 		Pressao();
 		void readSensor();
-		float getPressure();
 		void setID(int newID);
 		int getID();
 		void printTimestamp();

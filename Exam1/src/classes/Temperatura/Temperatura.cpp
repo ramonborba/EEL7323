@@ -37,9 +37,6 @@ void Temperatura::printTimestamp(){
 	dataHora.printClkCal();
 }
 
-float Temperatura::getTemp(){
-	return getValor();
-}
 int Temperatura::getID(){
 	return Sensor::getID();
 }

@@ -31,9 +31,6 @@ void Pressao::printTimestamp(){
 	dataHora.printClkCal();
 }
 
-float Pressao::getPressure(){
-	return getValor();
-}
 int Pressao::getID(){
 	return Sensor::getID();
 }
