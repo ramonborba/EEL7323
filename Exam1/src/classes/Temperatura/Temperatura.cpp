@@ -27,6 +27,17 @@ void Temperatura::readSensor(){
 	setValor(newTemp);
 }
 
-void Temperatura::printTimestamp(){
+void Temperatura::printTimestamp(){  //Testin purposes, may decite to keep it later
 	dataHora.printClkCal();
+}
+
+float Temperatura::getTemp(){  //Testin purposes, may decite to keep it later'
+	return getValor();
+}
+int Temperatura::getID(){
+	return Sensor::getID();
+}
+
+void Temperatura::setID(int newID){
+	Sensor::setID(newID);
 }
