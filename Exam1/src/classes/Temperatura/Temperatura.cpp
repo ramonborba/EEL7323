@@ -16,10 +16,17 @@
 #include <ctime>     // para usar time()
 
 void Temperatura::readSensor(){
-	// Data/hora da leitura do sensor - substituir os parametros do construtor do ClockCalendar por time()
-	dataHora = ClockCalendar (2021, 6, 30, 11, 59, 55, true);
+	float newTemp;
+
+	// Data/hora da leitura do sensor
+	dataHora = ClockCalendar(time(nullptr));
+	
 	// Simulacao de leitura de sensor
-	srand (static_cast <unsigned> (time(0)));
-	setValor(static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
+	srand(static_cast <unsigned> (time(0)));
+	newTemp = ((static_cast <float> (rand()) / static_cast <float> (RAND_MAX))*TEMP_RANGE)+TEMP_MIN;
+	setValor(newTemp);
 }
 
+void Temperatura::printTimestamp(){
+	dataHora.printClkCal();
+}
