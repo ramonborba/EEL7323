@@ -35,4 +35,21 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) -MMD -o $@ -c $<
 
 clean:
-	rm -r $(OBJDIR) $(OUTPUT)
+	rm -rf $(OBJDIR) $(OUTPUT)
+
+# ------------------------- Test Section ---------------------------
+
+TESTDIR=test
+TESTOUT=$(TESTDIR)/test_main.out
+TESTSRCS=$(TESTDIR)/test_main.cpp $(shell find $(SRCDIR) -type f -name "*.cpp" -and -not -name "main.cpp")
+TESTOBJS=$(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(TESTSRCS))
+
+test: $(TESTOUT)
+
+$(TESTOUT): $(TESTOBJS)
+	$(CC) -o $@ $^
+
+cleantest:
+	rm -rf $(OBJDIR) $(TESTOUT)
+
+cleanall: clean cleantest
