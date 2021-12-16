@@ -9,6 +9,8 @@
 #include "ClockCalendar.h"
 
 //ClockCalendar class members
+ClockCalendar::ClockCalendar() : Clock(), Calendar(){}
+
 ClockCalendar::ClockCalendar(int mt, int d, int y, int h, int m, int s, bool pm) : Clock(h, m, s, pm), Calendar(mt, d, y){}
 
 ClockCalendar::ClockCalendar(time_t current_time){
