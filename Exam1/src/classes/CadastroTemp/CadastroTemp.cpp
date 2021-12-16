@@ -11,7 +11,47 @@ using namespace std;
 
 #include "CadastroTemp.h"
 
-void CadastroTemp::newReading(){}
+void CadastroTemp::newReading(){
+    int newID, slot = -1;
+
+    // Verify available slots
+    for (int i = 0; i < N_TEMP_READINGS; i++)
+    {
+        if (!(tempReading[i].valid) && (slot == -1))
+        {
+            slot = i;
+            break;
+        }
+        else if (i == (N_TEMP_READINGS-1))
+        {
+            cout << "Nao ha espaco para novas leituras" << endl;
+            return;
+        }
+    }
+    
+    // Request reading ID to record
+    newID = requestID();
+
+    // Verify if ID is unique
+    for (int i = 0; i < N_TEMP_READINGS; i++)
+    {
+        if (tempReading[i].temp.getID() == newID)
+        {
+            cout << "ID ja existente" << endl;
+            return;
+        }
+    }
+
+    // Generate new sensor reading
+    if (slot != -1)
+    {
+        tempReading[slot].temp.setID(newID);
+        tempReading[slot].temp.readSensor();
+        tempReading[slot].valid=true;
+        cout << "Leitura cadastrada: " << endl;
+        // Show new reading -- use getReading()
+    } 
+}
 
 void CadastroTemp::delReading(){}
 
