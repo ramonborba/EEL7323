@@ -6,31 +6,32 @@
  * Description: Inheritance exercise - Student/Professor Registry
  */
 
+#include "../prof/prof.h"
+
 #define N_PROFS 20
 
-class Aluno {
-        int matricula;
-        float nota1;
-        float nota2;
-        float media;
-    public:
-        Aluno();
-        void set_nota(int, float);
-        void set_matricula(int);
-        float get_nota(int);
-        int get_matricula();
-        void calc_media();
-        float get_media();
+struct User
+{
+    Professor active_user;
+    bool logged_in = false;
 };
 
-class reg_aluno {
-        Aluno aluno[20];
-        int pede_matricula();
-        float pede_nota();
+class reg_prof {
+        Professor professor[N_PROFS];
+        User usr;
+        int pede_id();
+        std::string pede_password();
+        std::string pede_nome();
+        void pede_birth(int&, int&, int&);
     public:
-        void incluir_aluno();
-        void mod_aluno(int);
-        void exclui_aluno();
-        void consulta_aluno();
-        void lista_alunos();
+        void incluir_professor();
+        void mod_professor(int = -1);
+        void exclui_professor();
+        void consulta_professor();
+        void lista_professores();
+        void usr_login();
+        void usr_logout();
+        void usr_show();
+        bool usr_check_login();
+        bool vazio();
 };

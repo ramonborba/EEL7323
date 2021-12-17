@@ -13,7 +13,8 @@ using namespace std;
 
 //Members of class Pessoa
 Pessoa::Pessoa(){   //Necessita construtor da classe calendar???
-    nome = "";
+    set_nome();
+    set_birth();
 }
 
 void Pessoa::set_nome(string novo_nome){

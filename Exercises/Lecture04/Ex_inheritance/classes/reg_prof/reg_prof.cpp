@@ -12,175 +12,106 @@ using namespace std;
 
 #include "reg_prof.h"
 
+void reg_prof::incluir_professor(){
+    int new_id, slot = -1;
 
-//Membros da classe aluno
-aluno::aluno(){
-    matricula = -1;
-    nota1 = -1;
-    nota2 = -1;
-}
-
-void aluno::set_nota(int sel, float nota = 0){
-    if ((nota >= 0) && (nota <=10))
-    {
-        switch (sel)
-        {
-        case 1:
-            nota1 = nota;
-            return;
-            break;
-        
-        case 2:
-            nota2 = nota;
-            return;
-            break;
-
-        case 0:
-            nota1 = -1;
-            nota2 = -1;
-            return;
-            break;
-
-        default:
-            break;
-        }
-    }
-    else
-    {
-        cout << "Nota invalida, valor deve estar entre 0.0 e 10.0" << endl;
-    }
-}
-
-
-void aluno::set_matricula(int mat){
-    matricula = mat;
-}
-
-float aluno::get_nota(int sel){
-        switch (sel)
-        {
-        case 1:
-            return nota1;
-            break;
-
-        case 2:
-            return nota2;
-            break;
-
-        default:
-            return -1;
-            break;
-        }    
-}
-
-
-int aluno::get_matricula(){
-    return matricula;
-}
-
-void aluno::calc_media(){
-    if ((nota1 != -1) && (nota2 != -1))
-    {
-        media = (nota1+nota2)/2;
-    }
-    else
-    {
-        media = -1;
-    }    
-}
-
-float aluno::get_media(){
-    calc_media();
-    return media;
-}
-
-
-/*******************************************************************************/
-//Membros da classe turma
-
-void turma::cadastrar_estudante(){
-    int mat, slot = -1;
-
-    //Verifica se ha espaco para novos alunos
+    //Verifica se ha espaco para novos professores
     for (int i = 0; i < N_PROFS; i++)
     {
-        if ((estudante[i].get_matricula() == -1) && (slot == -1))
+        if ((professor[i].get_prof_id() == -1) && (slot == -1))
         {
             slot = i;
             break;
         }
         else if (i == (N_PROFS-1))
         {
-            cout << "Nao e possivel cadastrar novos alunos" << endl;
+            cout << "Nao e possivel cadastrar novos professores" << endl;
             return;
         }
     }
     
-    //Pede numero de matricula a ser cadastrado
-    mat = pede_matricula();
-    if (mat == -1)
+    //Pede numero de id a ser cadastrado
+    new_id = pede_id();
+    if (new_id == -1)
     {
         return;
     }
     
 
-    //Verifica se matricula ja existe
+    //Verifica se new_id ja existe
     for (int i = 0; i < N_PROFS; i++)
     {
-        if (estudante[i].get_matricula() == mat)
+        if (professor[i].get_prof_id() == new_id)
         {
-            cout << "Matricula já esxistente" << endl;
+            cout << "ID já esxistente" << endl;
             return;
-        }
-        else if ((estudante[i].get_matricula() == -1) && (slot == -1))
-        {
-            slot = i;
         }
     }
 
-    //Cadastra matricula do novo aluno
+    //Cadastra novo professor
     if (slot != -1)
     {
-        estudante[slot].set_matricula(mat);
-        mod_estudante(mat);
-        cout << "Aluno cadastrado com sucesso" << endl;
+        professor[slot].set_prof_id(new_id);
+        mod_professor(new_id);
+        cout << endl << "Professor cadastrado com sucesso" << endl;
     } 
 }
 
-void turma::mod_estudante(int mat = -1){
-    float nota;
-    if (mat == -1)
+void reg_prof::mod_professor(int req_id){
+    string nome;
+    char mod_senha;
+    int mo, day, yr;
+
+
+
+    if (req_id == -1)
     {
-        mat = pede_matricula();
-        if (mat == -1)
+        req_id = pede_id();
+        if (req_id == -1)
         {
             return;
         }
     }
     
-    //Procura pela matricula
+    //Procura pelo id
     for (int i = 0; i < N_PROFS; i++)
     {
-        if (mat == estudante[i].get_matricula())
+        if (req_id == professor[i].get_prof_id())
         {
-            //Modifica informações
-            cout << endl << "Nota 1 ( digite -1 para nao modificar)" << endl;
-            nota = pede_nota();
-            if (nota != -1)
+            //Modifica nome
+            cout << endl << "Nome do professor ( digite -1 para nao modificar)" << endl;
+            nome = pede_nome();
+            if (nome != "-1")
             {
-                estudante[i].set_nota(1, nota);
+                professor[i].set_nome(nome);
             } 
-            cout << endl << "Nota 2 ( digite -1 para nao modificar)" << endl;
-            nota = pede_nota();
-            if (nota != -1)
+            //Modifica data de nascimento
+            cout << endl << "Data de nascimento ( digite -1 para nao modificar)" << endl;
+            pede_birth(mo, day, yr);
+            if ((mo != -1) && (day != -1) && (yr != -1))
             {
-                estudante[i].set_nota(2, nota);
+                professor[i].set_birth(mo, day, yr);
+            } 
+
+            //Modifica senha
+            if (!professor[i].pswd_is_set)
+            {
+                professor[i].mod_password();
+            }
+            else
+            {
+                cout << endl << "Modificar senha (s:n)? " << endl;
+                cin >> mod_senha; cout << endl;
+                if (mod_senha == 's')
+                {
+                    professor[i].mod_password();
+                }
             }
             return;
         }
         else if (i == (N_PROFS-1))
         {
-            cout << "Matricula nao encontrada" << endl;
+            cout << "ID nao encontrado" << endl;
             return;
         }
         
@@ -188,91 +119,260 @@ void turma::mod_estudante(int mat = -1){
     
 }
 
-void turma::del_estudante(){
-    int mat = pede_matricula();
+void reg_prof::exclui_professor(){
+    int req_id = pede_id();
 
     //Procura pela matricula
     for (int i = 0; i < N_PROFS; i++)
     {
-        if (mat == estudante[i].get_matricula())
+        if (req_id == professor[i].get_prof_id())
         {
-            estudante[i].set_matricula(-1);
-            estudante[i].set_nota(0);
-            estudante[i].calc_media();
-            cout << "Aluno removido" << endl;
-            return;   
+            if (professor[i].delete_password())
+            {
+                professor[i].set_prof_id();
+                professor[i].set_nome();
+                professor[i].set_birth();
+                cout << "Professor removido" << endl;
+                return;       
+            } 
         }
         else if (i == (N_PROFS-1))
         {
             cout << "Matricula nao encontrada" << endl;
             return;
         }
-
     }
 }
 
-void turma::consulta_estudante(){
-    int mat = pede_matricula();
+void reg_prof::consulta_professor(){
+    int req_id = pede_id();
+    int mo, day, yr;
 
     //Procura pela matricula
     for (int i = 0; i < N_PROFS; i++)
     {
-        if (mat == estudante[i].get_matricula())
+        if (req_id == professor[i].get_prof_id())
         {
-            cout << endl << "Consulta de aluno:" << endl;
-            cout    << "-Matricula: " << setw(5) << setfill('0') << estudante[i].get_matricula() << endl
-                    << "-Nota 1: " << estudante[i].get_nota(1) << endl
-                    << "-Nota 2: " << estudante[i].get_nota(2) << endl
-                    << "-Media : " << estudante[i].get_media() << endl << endl;
+            professor[i].get_birth(mo, day, yr);
+            cout << endl << "Consulta de professor:" << endl;
+            cout    << "- ID        : " << setw(5) << setfill('0') << professor[i].get_prof_id() << endl
+                    << "- Nome      : " << professor[i].get_nome() << endl
+                    << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl;
                 return;   
         }
         else if (i == (N_PROFS-1))
         {
-            cout << "Matricula nao encontrada" << endl;
+            cout << "ID nao encontrado" << endl;
             return;
         }
         
     }
 }
 
-void turma::lista_estudantes(){
-    
+void reg_prof::lista_professores(){
+    int mo, day, yr;
+
     cout << endl;
-    cout << "Lista de alunos:" << endl << endl;
+    cout << "Lista de professores:" << endl << endl;
 
     for (int i = 0; i < N_PROFS; i++)
     {
-        cout    << "Aluno " << (i+1) << ":" << endl 
-                << "-Matricula: " << setw(5) << setfill('0') << estudante[i].get_matricula() << endl
-                << "-Nota 1: " << estudante[i].get_nota(1) << endl
-                << "-Nota 2: " << estudante[i].get_nota(2) << endl
-                << "-Media : " << estudante[i].get_media() << endl << endl;
+        if (professor[i].get_prof_id() != -1)
+        {
+            professor[i].get_birth(mo, day, yr);
+            cout    << "Professor " << (i+1) << ":" << endl ;
+            cout    << "- ID        : " << setw(5) << setfill('0') << professor[i].get_prof_id() << endl
+                    << "- Nome      : " << professor[i].get_nome() << endl
+                    << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl << endl;
+        }
     }
     
 }
 
-int turma::pede_matricula(){
-    int mat;
-    //Pede numero de matricula
-    cout << endl << "Digite o numero de matrícula: ";
-    cin >> mat;
-    
-    //Verifica se matrícula é valida
-    if (mat < 0)
+void reg_prof::usr_show(){
+    int mo, day, yr;
+    if (usr.logged_in)
+    {    
+        usr.active_user.get_birth(mo, day, yr);
+        cout << "Usuario ativo:" << endl;
+        cout    << "- ID        : " << setw(5) << setfill('0') << usr.active_user.get_prof_id() << endl
+                << "- Nome      : " << usr.active_user.get_nome() << endl
+                << "- Nascimento: " << setw(2) << day << "/" << mo << "/" << setw(4) << yr << endl;
+    }
+    else
     {
-        cout << "Matricula invalida" << endl;
+        cout << "Nenhum usuário ativo" << endl;
+    }
+    return;
+}
+
+void reg_prof::usr_login(){
+    int req_id;
+    string pswd;
+
+    if (!usr.logged_in)
+    {
+        req_id = pede_id();
+        for (int i = 0; i < N_PROFS; i++)
+        {
+            if (req_id == professor[i].get_prof_id())
+            {
+                pswd = pede_password();
+                if (professor[i].check_password(pswd))
+                {
+                    usr.active_user = professor[i];
+                    usr.logged_in = true;
+                    cout << endl << "Login efetuado" << endl;
+                    return;
+                }
+                else
+                {
+                    cout << "Senha incorreta" << endl;
+                    return;
+                }           
+            }
+            else if (i == (N_PROFS-1))
+            {
+                cout << "ID nao encontrado" << endl;
+            }
+        }
+    }
+    else
+    {
+        cout << "Ja existe um usuário ativo" << endl << endl;
+    }
+    return;
+}
+
+
+void reg_prof::usr_logout(){
+    int req_id;
+    Professor null_prof;
+
+    if (usr.logged_in)
+    {
+        usr.logged_in = false;
+        usr.active_user = null_prof;
+        cout << endl << "Logout efetuado" << endl;
+    }
+    else
+    {
+        cout << "Nenhum usuário ativo" << endl << endl;
+    }
+    return;
+}
+
+bool reg_prof::usr_check_login(){
+    return usr.logged_in;
+}
+
+bool reg_prof::vazio(){
+    for (int i = 0; i < N_PROFS; i++){
+        if (professor[i].get_prof_id() != -1)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int reg_prof::pede_id(){
+    int req_id;
+    //Pede numero de id
+    bool valid;
+    while (!valid)
+    {
+        cout << endl << "Digite o ID: ";
+        cin >> req_id;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }    
+    //Verifica se id é valido
+    if (req_id < 0)
+    {
+        cout << "ID invalido" << endl;
         return -1;
     }
     else
     {
-        return mat;
+        return req_id;
     }
 }
 
-float turma::pede_nota(){
-    float nota;
-    //Pede valor da nota
-    cout << "Digite o valor da nota: ";
-    cin >> nota;
-    return nota;
+
+string reg_prof::pede_nome(){
+    string nome;
+    //Pede nome
+    cout << "Digite o nome: ";
+    cin >> nome;
+    return nome;
+}
+
+void reg_prof::pede_birth(int& mo, int& day, int& yr){
+    //Pede datas
+    bool valid;
+    while (!valid)
+    {
+        cout << "Digite o dia: ";
+        cin >> day;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }
+    valid=false;
+    while (!valid)
+    {
+        cout << "Digite o mes: ";
+        cin >> mo;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }
+    valid=false;
+    while (!valid)
+    {
+        cout << "Digite o ano: ";
+        cin >> yr;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }
+}
+
+string reg_prof::pede_password(){
+    string pswd;
+    
+    cout << "Digite a senha: ";
+    cin >> pswd;
+    cout << endl;
+    return pswd;
 }

@@ -8,8 +8,10 @@
 #ifndef _ALUNO_H_
 #define _ALUNO_H_
 
+#include "../pessoa/pessoa.h"
+
 //Class Aluno definition
-class Aluno {
+class Aluno: public Pessoa {
         int matricula;
         float nota1;
         float nota2;
