@@ -279,9 +279,22 @@ bool reg_prof::vazio(){
 int reg_prof::pede_id(){
     int req_id;
     //Pede numero de id
-    cout << endl << "Digite o ID: ";
-    cin >> req_id;
-    
+    bool valid;
+    while (!valid)
+    {
+        cout << endl << "Digite o ID: ";
+        cin >> req_id;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }    
     //Verifica se id é valido
     if (req_id < 0)
     {
@@ -305,12 +318,54 @@ string reg_prof::pede_nome(){
 
 void reg_prof::pede_birth(int& mo, int& day, int& yr){
     //Pede datas
-    cout << "Digite o dia: ";
-    cin >> day;
-    cout << "Digite o mes: ";
-    cin >> mo;
-    cout << "Digite o ano: ";
-    cin >> yr;
+    bool valid;
+    while (!valid)
+    {
+        cout << "Digite o dia: ";
+        cin >> day;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }
+    valid=false;
+    while (!valid)
+    {
+        cout << "Digite o mes: ";
+        cin >> mo;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }
+    valid=false;
+    while (!valid)
+    {
+        cout << "Digite o ano: ";
+        cin >> yr;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }
 }
 
 string reg_prof::pede_password(){

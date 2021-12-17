@@ -212,8 +212,22 @@ int reg_aluno::pede_matricula(){
 float reg_aluno::pede_nota(){
     float nota;
     //Pede valor da nota
-    cout << "Digite o valor da nota: ";
-    cin >> nota;
+    bool valid;
+    while (!valid)
+    {
+        cout << "Digite o valor da nota: ";
+        cin >> nota;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }
     return nota;
 }
 
@@ -227,10 +241,52 @@ string reg_aluno::pede_nome(){
 
 void reg_aluno::pede_birth(int& mo, int& day, int& yr){
     //Pede datas
-    cout << "Digite o dia: ";
-    cin >> day;
-    cout << "Digite o mes: ";
-    cin >> mo;
-    cout << "Digite o ano: ";
-    cin >> yr;
+    bool valid;
+    while (!valid)
+    {
+        cout << "Digite o dia: ";
+        cin >> day;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }
+    valid=false;
+    while (!valid)
+    {
+        cout << "Digite o mes: ";
+        cin >> mo;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }
+    valid=false;
+    while (!valid)
+    {
+        cout << "Digite o ano: ";
+        cin >> yr;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Entrada invalida, tente novamente" << endl;
+        }
+        else
+        {
+            valid=true;
+        }
+    }
 }

@@ -29,6 +29,8 @@ int main(){
     system("clear");
     while (!sair)
     {       
+        cout << "-----------------------------------------------------------------------" << endl;
+        cout << endl;
         cout << "Sistema de registro de alunos e professores:" << endl;
         cout << endl;
         cout << "-Indice de operacoes:" << endl << endl;
@@ -54,6 +56,15 @@ int main(){
         }
         cout << endl << "Escolha a operacao: ";
         cin >> op; cout << endl;
+        if ( cin.fail() )
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            op = -1;
+        }
+        
+        cout << "-----------------------------------------------------------------------" << endl;
+        cout << endl;
 
         switch (op)
         {
