@@ -18,9 +18,11 @@ class CBox : public CShape3d {
 };
 
 CBox::CBox(float h, float w, float l){
-
+    this->h = h;
+    this->w = w;
+    this->l = l;
 }
 
 float CBox::volume(){
-
+    return h*w*l;
 }
