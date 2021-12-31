@@ -11,5 +11,5 @@
 
 class CShape3d {
     public:
-        virtual float volume() = 0;
+        virtual float volume() = 0;         // Pure virtual function for volume calculation, to be implemented by derived classes
 };
