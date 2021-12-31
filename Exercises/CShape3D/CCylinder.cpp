@@ -11,13 +11,13 @@
 
 class CCylinder : public CShape3d {
     private:
-        float r, h;                  // Attributes for radius (r) and height (h)
+        float r, h;                     // Attributes for radius (r) and height (h)
     public:
-        CCylinder(float, float, float);      // Constructor for CCylinder, r and h as parameters
-        float volume();
+        CCylinder(float, float);        // Constructor for CCylinder, r and h as parameters
+        float volume();                 // Implementation of volume() method for cylinder shape
 };
 
-CCylinder::CCylinder(float h, float w, float l){
+CCylinder::CCylinder(float r, float h){
 
 }
 
