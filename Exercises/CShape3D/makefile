@@ -9,7 +9,7 @@
 CC=g++
 
 # Source files
-SRCS=$(wildcard ./*.cpp)
+SRCS=testCShape3d.cpp
 
 # Output
 OUTPUT=app.out
