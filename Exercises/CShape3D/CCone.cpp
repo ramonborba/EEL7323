@@ -13,8 +13,8 @@ class CCone : public CShape3d {
     private:
         float r, h;                  // Attributes for radius (r) and height (h)
     public:
-        CCone(float, float);      // Constructor for CCone, receiving r and h as parameters
-        float volume();
+        CCone(float, float);        // Constructor for CCone, receiving r and h as parameters
+        float volume();             // Implementation of volume() method for cone shape
 };
 
 CCone::CCone(float r, float h){
