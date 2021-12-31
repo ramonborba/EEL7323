@@ -18,6 +18,9 @@
  *
  */
 
+#include <iostream>
+using namespace std;
+
 #include "CShape3d.cpp"
 #include "CBox.cpp"
 #include "CCone.cpp"
