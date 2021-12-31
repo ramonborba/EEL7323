@@ -14,7 +14,7 @@ class CBox : public CShape3d {
         float h, w, l;                  // Attributes for height (h), width (w) and length (l)
     public:
         CBox(float, float, float);      // Constructor for CBox, receiving h, w and l as parameters
-        float volume();
+        float volume();                 // Implementation of volume() method for box shape
 };
 
 CBox::CBox(float h, float w, float l){
@@ -22,5 +22,5 @@ CBox::CBox(float h, float w, float l){
 }
 
 float CBox::volume(){
-    
+
 }
