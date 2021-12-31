@@ -8,6 +8,9 @@
  * Description: CCylinder class for CShape3d assingment
  * 
  */
+#ifndef _PI_
+#define PI 3.1415926536
+#endif /* _PI_ */
 
 class CCylinder : public CShape3d {
     private:
@@ -18,9 +21,10 @@ class CCylinder : public CShape3d {
 };
 
 CCylinder::CCylinder(float r, float h){
-
+    this->r = r;
+    this->h = h;
 }
 
 float CCylinder::volume(){
-    
+    return PI*r*r*h;
 }
