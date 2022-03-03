@@ -10,10 +10,10 @@ CC=g++
 SRCDIR=src
 
 # Directory containing the object files
-OBJDIR=obj
+OBJDIR=build
 
 # Output directory
-OUTDIR=.
+OUTDIR=bin
 
 # Output file
 OUTPUT=$(OUTDIR)/main
