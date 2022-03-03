@@ -8,5 +8,6 @@
 #include "EmbSys.h"
 
 char EmbSys::requestLog(){
-    sendCommand(cmd);
+    char c = sendCommand(cmd);
+    return c;
 }
