@@ -5,12 +5,28 @@
  * File: main.cpp
  */
 #include <iostream>
+#include <thread>
+#include "EmbSysLinux/EmbSysLinux.h"
+
 using namespace std;
 
 
 void pressEnterToContinue();
 
+void readSerial(){
+    EmbSysLinux* esp32;
+    const char* port = "/dev/ttyUSB0";
+    esp32 = new EmbSysLinux();
+
+    esp32->openSerial(port);
+    esp32->readLog();
+    delete esp32;
+}
+
 int main(){
+
+    thread readser (readSerial);
+    
     bool validop = false;
     char op = '0';
 
