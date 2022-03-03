@@ -21,15 +21,15 @@ class EmbSysLinux : public EmbSys {
     private:
         fstream logfile;
         const char* logfilename = "logfile.txt";
-        int serial;                                         // Handle to serial port
+        int serial;                                                 // Handle to serial port
     protected:
 
     public:
-        void openSerial(const char* port);                        // Open serial port
+        void openSerial(const char* port);                          // Open serial port
 
-        char sendCommand(char cmd);                         // Send command to embedded system
+        char sendCommand(char cmd);                                 // Send command to embedded system
 
-        void readLog();                                     // Read incoming log information
+        void readLog();                                             // Read incoming log information (run in a thread)
 
-        void storeData(char* info);                                   // Store log information in a file as hex value
+        void storeData(char* info);                                 // Store log information in a file as hex value
 };

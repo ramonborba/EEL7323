@@ -18,7 +18,7 @@ void EmbSysLinux::openSerial(const char* port){
       cout << "Error opening " << serial << endl;
    else
       fcntl(serial, F_SETFL, 0);
-   cout << "Serial port in use: " << serial << endl << endl;
+   cout << "Serial port in use: " << port << endl << endl;
 
    // Program serial port to 115200, 8, 1, no parity
    //
@@ -73,14 +73,19 @@ char EmbSysLinux::sendCommand(char cmd){
 
 void EmbSysLinux::readLog(){
     int i, nbytes;
-
-    while(true)
+    if (serial == -1)
+        cout << "Erro: the serial port is closed. Please, "
+        << "use the openSerial() method to open it. " << endl;
+    else
     {
-        ioctl(serial, FIONREAD, &nbytes);               // Detect bytes in IO buffer
-        data = new char[nbytes];
-        i = read(serial, data, sizeof(data));         // Read available data
-        storeData(data);                               // Store data
-        delete[] data;
+        while(true)
+        {
+            ioctl(serial, FIONREAD, &nbytes);               // Detect bytes in IO buffer
+            data = new char[nbytes];
+            i = read(serial, data, sizeof(data));         // Read available data
+            storeData(data);                               // Store data
+            delete[] data;
+        }
     }
 }
 
