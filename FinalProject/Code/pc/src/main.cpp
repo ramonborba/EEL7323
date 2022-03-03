@@ -26,7 +26,7 @@ void readSerial(){
 int main(){
 
     thread readser (readSerial);
-    
+    usleep(500000); // Wait for readser thread to print serial connection report
     bool validop = false;
     char op = '0';
 
@@ -50,35 +50,35 @@ int main(){
 
         switch (op)
         {
-        case 1:
+        case '1':
             pressEnterToContinue();
             break;
 
-        case 2:
+        case '2':
             pressEnterToContinue();
             break;
 
-        // case 3:
+        // case '3':
         //     pressEnterToContinue();
         //     break;
 
-        // case 4:
+        // case '4':
         //     pressEnterToContinue();
         //     break;
 
-        // case 5:
+        // case '5':
         //     pressEnterToContinue();
         //     break;
 
-        // case 6:
+        // case '6':
         //     pressEnterToContinue();
         //     break;
 
-        // case 7:
+        // case '7':
         //     pressEnterToContinue();
         //     break;
 
-        // case 8:
+        // case '8':
         //     pressEnterToContinue();
         //     break;
 
