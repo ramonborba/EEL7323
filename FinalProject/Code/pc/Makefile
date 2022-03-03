@@ -6,6 +6,9 @@
 # Compiler
 CC=g++
 
+# Compiler flags
+CFLAGS=-pthread
+
 # Directory containing the source files
 SRCDIR=src
 
@@ -32,7 +35,7 @@ default: $(OUTPUT)
 
 # Generates main output from object files
 $(OUTPUT): $(OBJS)
-	$(CC) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 # Include compiler generated dependencies lists
 -include $(DEPS)
@@ -40,7 +43,7 @@ $(OUTPUT): $(OBJS)
 # Generates object files from corresponding source files
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	mkdir -p $(@D)
-	$(CC) -MMD -o $@ -c $<
+	$(CC) $(CFLAGS) -MMD -o $@ -c $<
 
 # Remove all files generated in the compliation process
 clean:
@@ -56,7 +59,7 @@ TESTOBJS=$(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(TESTSRCS))
 test: $(TESTOUT)
 
 $(TESTOUT): $(TESTOBJS)
-	$(CC) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 cleantest:
 	rm -rf $(OBJDIR) $(TESTOUT)
