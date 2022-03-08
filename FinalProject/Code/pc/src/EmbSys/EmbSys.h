@@ -23,7 +23,7 @@ class EmbSys {
 
         virtual char sendCommand(char cmd) = 0;                 // Send command to embedded system
 
-        virtual void readLog() = 0;                             // Read incoming log information
+        virtual void serialMonitor() = 0;                             // Read incoming log information
 
         virtual void storeData(char* info) = 0;                           // Store log information in a file as hex values
 

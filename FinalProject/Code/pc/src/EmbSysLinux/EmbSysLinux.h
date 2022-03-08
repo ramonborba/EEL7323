@@ -20,7 +20,7 @@ using namespace std;
 class EmbSysLinux : public EmbSys {
     private:
         fstream logfile;
-        const char* logfilename = "logfile.txt";
+        const char* logfilename = "logfile.bin";
         int serial;                                                 // Handle to serial port
     protected:
 
@@ -29,7 +29,7 @@ class EmbSysLinux : public EmbSys {
 
         char sendCommand(char cmd);                                 // Send command to embedded system
 
-        void readLog();                                             // Read incoming log information (run in a thread)
+        void serialMonitor();                                             // Read incoming log information (run in a thread)
 
         void storeData(char* info);                                 // Store log information in a file as hex value
 };

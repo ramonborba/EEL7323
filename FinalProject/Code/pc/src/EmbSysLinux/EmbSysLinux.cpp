@@ -71,7 +71,7 @@ char EmbSysLinux::sendCommand(char cmd){
     return npkg;
 }
 
-void EmbSysLinux::readLog(){
+void EmbSysLinux::serialMonitor(){
     int i, nbytes;
     if (serial == -1)
         cout << "Erro: the serial port is closed. Please, "
@@ -83,20 +83,8 @@ void EmbSysLinux::readLog(){
             ioctl(serial, FIONREAD, &nbytes);               // Detect bytes in IO buffer
             data = new char[nbytes];
             i = read(serial, data, sizeof(data));         // Read available data
-            storeData(data);                               // Store data
+            // Store data
             delete[] data;
         }
     }
-}
-
-void EmbSysLinux::storeData(char* info){
-
-    logfile.open(logfilename, fstream::app);
-    if (!logfile.is_open())
-    {
-        return;
-    }
-    logfile << info;
-    logfile.close();
-    return;
 }

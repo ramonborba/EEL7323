@@ -19,7 +19,7 @@ void readSerial(){
     esp32 = new EmbSysLinux();
 
     esp32->openSerial(port);
-    esp32->readLog();
+    esp32->serialMonitor();
     delete esp32;
 }
 
