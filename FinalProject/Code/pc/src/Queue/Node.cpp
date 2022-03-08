@@ -9,28 +9,26 @@
 
 Node::Node(int data, Node* nxt)
 {
-}
-
-Node::~Node()
-{
+    datapkt = data;
+    next = nxt;
 }
 
 int Node::getData()
 {
-    
+    return datapkt;
 }
 
 Node* Node::getNext()
 {
-
+    return next;
 }
 
 void Node::setData(int data)
 {
-
+    datapkt = data;
 }
 
 void Node::setNext(Node* nxt)
 {
-    
+    next = nxt;
 }
