@@ -5,16 +5,16 @@
  * File: Node.h
  */
 
-
+#include "datapkt.h"
 
 class Node
 {
 protected:
-    int datapkt;                            // placeholder for embedded system data packet(TBD)
+    datapkt_t datapkt;                      // Data packet information
     Node* next;                             // Pointer to next node
 
 public:
-    Node(int datapkt, Node* next);          
+    Node(datapkt_t datapkt, Node* next);          
     ~Node();
 
     int getData();
