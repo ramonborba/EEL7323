@@ -16,9 +16,9 @@ private:
 public:
     Queue();
     ~Queue();
+    void enqueue(datapkt_t);
     void dequeue();
-    void enqueue();
-    void dateSearch();
+    void dateSearch(int, int);
     void printTotalTime();
 };
 
