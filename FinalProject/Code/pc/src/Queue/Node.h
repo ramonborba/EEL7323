@@ -15,10 +15,9 @@ protected:
 
 public:
     Node(datapkt_t datapkt, Node* next);          
-    ~Node();
-
-    int getData();
+    
+    datapkt_t getData();
     Node* getNext();
-    void setData(int data);
+    void setData(datapkt_t data);
     void setNext(Node* nxt);
 };

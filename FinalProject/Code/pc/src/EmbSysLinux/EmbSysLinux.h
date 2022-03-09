@@ -14,22 +14,18 @@
 #include <sys/ioctl.h>
 #include "../EmbSys/EmbSys.h"
 
-using namespace std;
-
 
 class EmbSysLinux : public EmbSys {
     private:
-        fstream logfile;
-        const char* logfilename = "logfile.bin";
+
         int serial;                                                 // Handle to serial port
     protected:
 
     public:
         void openSerial(const char* port);                          // Open serial port
 
-        char sendCommand(char cmd);                                 // Send command to embedded system
+        uint8_t sendCommand(uint8_t cmd);                           // Send command to embedded system
 
-        void serialMonitor();                                             // Read incoming log information (run in a thread)
+        void serialMonitor();                                       // Read incoming log information (run in a thread)
 
-        void storeData(char* info);                                 // Store log information in a file as hex value
 };

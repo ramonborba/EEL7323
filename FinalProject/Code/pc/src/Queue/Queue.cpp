@@ -63,7 +63,7 @@ void Queue::dateSearch(int min, int max)
     int val = 0;
     while (scan)
     {
-        val = scan->getData().val;                              // Placeholde search algorithm
+        val = scan->getData().val;                              // Placeholder search algorithm
         if ((val >= min) && (val <= max))
         {
             std::cout << scan->getData().val << std::endl;
@@ -84,7 +84,7 @@ void Queue::printTotalTime()
     int val = 0;
     while (scan)
     {
-        val += scan->getData().val;                              // Placeholde adding algorithm
+        val += scan->getData().val;                              // Placeholder adding algorithm
         scan = scan->getNext();
     }
     std::cout << "Total: " << val << std::endl;

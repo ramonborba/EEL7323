@@ -7,7 +7,7 @@
 
 #include "EmbSys.h"
 
-char EmbSys::requestLog(){
-    char c = sendCommand(cmd);
+uint8_t EmbSys::requestLog(){
+    uint8_t c = sendCommand(cmd);
     return c;
 }

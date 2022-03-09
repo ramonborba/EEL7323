@@ -16,9 +16,11 @@ private:
 public:
     Queue();
     ~Queue();
+
     void enqueue(datapkt_t);
     void dequeue();
-    void dateSearch(int, int);
-    void printTotalTime();
+    
+    void dateSearch(int, int);                          // Displays Log information between dates
+    void printTotalTime();                              // Displays total time the AC was powered
 };
 
