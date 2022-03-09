@@ -65,7 +65,7 @@ uint8_t EmbSysLinux::sendCommand(uint8_t cmd){
         else {
             fcntl(serial, F_SETFL, FNDELAY);
             int i = read(serial, &npkg, 1); // read 1 Byte interface status
-            fcntl(serial, F_SETFL, 0); 
+            fcntl(serial, F_SETFL, 0);
         }
     }
     return npkg;
@@ -73,7 +73,11 @@ uint8_t EmbSysLinux::sendCommand(uint8_t cmd){
 
 void EmbSysLinux::serialMonitor(){
     int i, nbytes;
-    Node*   log_entry;
+
+    datapkt_t data;
+    data.val = 0;
+    data.msg = "empty";
+
     if (serial == -1)
         std::cout << "Erro: the serial port is closed. Please, "
         << "use the openSerial() method to open it. " << std::endl;
@@ -82,8 +86,8 @@ void EmbSysLinux::serialMonitor(){
         while(true)
         {                                                               // Read incoming data routine (depends on definition of Node, expected to read data in hex format)
             ioctl(serial, FIONREAD, &nbytes);                           // Detect bytes in IO buffer
-            // i = read(serial, log_entry, sizeof(log_entry));          // Read available log
-            // log.enqueue(log_entry);                                  // Store log
+            i = read(serial, data.msg, nbytes);                         // Read available log (for now, a simple Hello World!)
+            log.enqueue(data);                                          // Store log
         }
     }
 }
