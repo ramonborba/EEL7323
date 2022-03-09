@@ -15,10 +15,10 @@ void EmbSysLinux::openSerial(const char* port){
 
    serial = open(port, O_RDWR|O_NOCTTY|O_NDELAY);
    if (serial == -1)      // ERROR!!
-      cout << "Error opening " << serial << endl;
+        std::cout << "Error opening " << serial << std::endl;
    else
-      fcntl(serial, F_SETFL, 0);
-   cout << "Serial port in use: " << port << endl << endl;
+        fcntl(serial, F_SETFL, 0);
+   std::cout << "Serial port in use: " << port << std::endl << std::endl;
 
    // Program serial port to 115200, 8, 1, no parity
    //
@@ -51,17 +51,17 @@ void EmbSysLinux::openSerial(const char* port){
 }
 
 
-char EmbSysLinux::sendCommand(char cmd){
+uint8_t EmbSysLinux::sendCommand(uint8_t cmd){
 
-    int npkg;
+    uint8_t npkg=-1;                                                           // Number of packets to receive from the embedded system
 
     if (serial == -1)
-        cout << "Erro: the serial port is closed. Please, "
-        << "use the openSerial() method to open it. " << endl;
+        std::cout << "Erro: the serial port is closed. Please, "
+        << "use the openSerial() method to open it. " << std::endl;
     else{
-        int n = write(serial, &cmd, 1);  // send 2 bytes command & motors
+        int n = write(serial, &cmd, 1);  // send 2 bytes command
         if (n < 0)
-            cout << "Error! write() command failed." << endl;
+            std::cout << "Error! write() command failed." << std::endl;
         else {
             fcntl(serial, F_SETFL, FNDELAY);
             int i = read(serial, &npkg, 1); // read 1 Byte interface status
@@ -73,18 +73,17 @@ char EmbSysLinux::sendCommand(char cmd){
 
 void EmbSysLinux::serialMonitor(){
     int i, nbytes;
+    Node*   log_entry;
     if (serial == -1)
-        cout << "Erro: the serial port is closed. Please, "
-        << "use the openSerial() method to open it. " << endl;
+        std::cout << "Erro: the serial port is closed. Please, "
+        << "use the openSerial() method to open it. " << std::endl;
     else
     {
         while(true)
-        {
-            ioctl(serial, FIONREAD, &nbytes);               // Detect bytes in IO buffer
-            data = new char[nbytes];
-            i = read(serial, data, sizeof(data));         // Read available data
-            // Store data
-            delete[] data;
+        {                                                               // Read incoming data routine (depends on definition of Node, expected to read data in hex format)
+            ioctl(serial, FIONREAD, &nbytes);                           // Detect bytes in IO buffer
+            // i = read(serial, log_entry, sizeof(log_entry));          // Read available log
+            // log.enqueue(log_entry);                                  // Store log
         }
     }
 }
