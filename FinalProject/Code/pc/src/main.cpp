@@ -6,28 +6,20 @@
  */
 #include <iostream>
 #include <thread>
-#include "EmbSysLinux/EmbSysLinux.h"
+#include "../src/EmbSysLinux/EmbSysLinux.h"
 
 using namespace std;
 
-
+void serialMonitoring();
 void pressEnterToContinue();
 
-void readSerial(){
-    EmbSysLinux* esp32;
-    const char* port = "/dev/ttyUSB0";
-    esp32 = new EmbSysLinux();
-
-    esp32->openSerial(port);
-    esp32->serialMonitor();
-    delete esp32;
-}
+EmbSysLinux* esp32;                             // Embedded System interface
 
 int main(){
+    esp32 = new EmbSysLinux();
 
-    thread readser (readSerial);
+    thread monitor (serialMonitoring);
     usleep(500000); // Wait for readser thread to print serial connection report
-    bool validop = false;
     char op = '0';
 
 
@@ -46,41 +38,20 @@ int main(){
         cout << "Escolha a operacao: ";
         cin >> op;
         cout << endl;
-        cout << "-------------------------------------------------------------" << endl;
+        cout << "-------------------------------------------------------------" << endl << endl;
 
         switch (op)
         {
         case '1':
+            esp32->listData();
             pressEnterToContinue();
             break;
 
         case '2':
+            esp32->displayTotalTime();
             pressEnterToContinue();
             break;
 
-        // case '3':
-        //     pressEnterToContinue();
-        //     break;
-
-        // case '4':
-        //     pressEnterToContinue();
-        //     break;
-
-        // case '5':
-        //     pressEnterToContinue();
-        //     break;
-
-        // case '6':
-        //     pressEnterToContinue();
-        //     break;
-
-        // case '7':
-        //     pressEnterToContinue();
-        //     break;
-
-        // case '8':
-        //     pressEnterToContinue();
-        //     break;
 
         default:
             cout << endl << "Operação invalida, tente novamente" << endl;
@@ -89,8 +60,18 @@ int main(){
         }
 
     }
-
+    delete esp32;
     return 0;
+}
+
+
+void serialMonitoring()
+{
+    const char* port = "/dev/ttyUSB0";  // Port to use
+    
+    esp32->openSerial(port);
+    esp32->serialMonitor();
+    delete esp32;
 }
 
 void pressEnterToContinue(){
