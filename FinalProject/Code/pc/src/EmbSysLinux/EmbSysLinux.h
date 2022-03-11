@@ -5,13 +5,9 @@
  * File: EmbSysLinux.h
  */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <termios.h>
-#include <iostream>
-#include <string.h>
-#include <sys/ioctl.h>
+#ifndef EMBSYSLINUX_H
+#define EMBSYSLINUX_H
+
 #include "../EmbSys/EmbSys.h"
 
 
@@ -29,3 +25,4 @@ class EmbSysLinux : public EmbSys {
         void serialMonitor();                                       // Read incoming log information (run in a thread)
 
 };
+#endif  /* EMBSYSLINUX_H */

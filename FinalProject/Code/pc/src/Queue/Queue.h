@@ -4,8 +4,11 @@
  * Date: 08/03/2022
  * File: Queue.h
  */
+#ifndef QUEUE_H
+#define QUEUE_H
 
 #include "Node.h"
+
 
 
 class Queue
@@ -24,3 +27,4 @@ public:
     void printTotalTime();                              // Displays total time the AC was powered
 };
 
+#endif  /* QUEUE_H */

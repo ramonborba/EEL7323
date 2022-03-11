@@ -9,5 +9,6 @@
 struct datapkt_t                // Most likely going to become a class
 {
     int val;                    // place holder for embedded system log information (TBD)
-    char* msg;
+    int pktn;
+    char msg[20];
 };

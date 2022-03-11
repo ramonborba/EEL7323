@@ -5,6 +5,13 @@
  * File: EmbSysLinux.cpp
  */
 
+#include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <termios.h>
+#include <iostream>
+#include <string.h>
+#include <sys/ioctl.h>
 #include "EmbSysLinux.h"
 
 
@@ -75,19 +82,25 @@ void EmbSysLinux::serialMonitor(){
     int i, nbytes;
 
     datapkt_t data;
-    data.val = 0;
-    data.msg = "empty";
+    
 
     if (serial == -1)
         std::cout << "Erro: the serial port is closed. Please, "
         << "use the openSerial() method to open it. " << std::endl;
     else
     {
+        data.val = 1;
+        data.pktn = 1;
         while(true)
-        {                                                               // Read incoming data routine (depends on definition of Node, expected to read data in hex format)
-            ioctl(serial, FIONREAD, &nbytes);                           // Detect bytes in IO buffer
-            i = read(serial, data.msg, nbytes);                         // Read available log (for now, a simple Hello World!)
-            log.enqueue(data);                                          // Store log
+        {                                                                   // Read incoming data routine (depends on definition of Node, expected to read data in hex format)
+            ioctl(serial, FIONREAD, &nbytes);
+            if (nbytes > 0)                                                 // Detect bytes in IO buffer
+            {
+                i = read(serial, data.msg, nbytes);                         // Read available log (for now, a simple Hello World!)
+                log.enqueue(data);                                          // Store log
+                data.pktn++;
+            }
+            usleep(100000);                                                 // Wait before trying to read again
         }
     }
 }

@@ -7,6 +7,7 @@
 #include <iostream>
 #include "Queue.h"
 
+
 Queue::Queue ()
 {
     head = 0;
@@ -53,39 +54,46 @@ void Queue::dequeue()
 
 void Queue::dateSearch(int min, int max)
 {
+    int val = 0;
     Node* scan = head;
-    if (!scan)
+    
+    if (scan == nullptr)
     {
         std::cout << "Sem nodos na fila" << std::endl;
-        return;
     }
-    
-    int val = 0;
-    while (scan)
+    else
     {
-        val = scan->getData().val;                              // Placeholder search algorithm
-        if ((val >= min) && (val <= max))
+        while (scan != nullptr)
         {
-            std::cout << scan->getData().val << std::endl;
+            val = scan->getData().pktn;                              // Placeholder search algorithm
+            if ((val >= min) && (val <= max))
+            {
+                std::cout << std::endl;
+                std::cout << "Pkt number: "<< scan->getData().pktn << std::endl;
+                std::cout << "Value: " << scan->getData().val << std::endl;
+                std::cout << "Msg: " << scan->getData().msg << std::endl;
+            }
+            scan = scan->getNext();
         }
-        scan = scan->getNext();
     }
+    return;
 }
 
 void Queue::printTotalTime()
 {
     Node* scan = head;
-    if (!scan)
+    int val = 0;
+    if (scan == nullptr)
     {
         std::cout << "Sem nodos na fila" << std::endl;
-        return;
     }
-    
-    int val = 0;
-    while (scan)
+    else
     {
-        val += scan->getData().val;                              // Placeholder adding algorithm
-        scan = scan->getNext();
+        while (scan != nullptr)
+        {
+            val += scan->getData().val;                              // Placeholder adding algorithm
+            scan = scan->getNext();
+        }
+        std::cout << "Total: " << val << std::endl;
     }
-    std::cout << "Total: " << val << std::endl;
 }

@@ -5,6 +5,9 @@
  * File: Node.h
  */
 
+#ifndef NODE_H
+#define NODE_H
+
 #include "datapkt.h"
 
 class Node
@@ -21,3 +24,5 @@ public:
     void setData(datapkt_t data);
     void setNext(Node* nxt);
 };
+
+#endif  /* NODE_H */
