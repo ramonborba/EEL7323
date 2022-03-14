@@ -8,7 +8,7 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "datapkt.h"
+#include "Datapkt.h"
 
 class Node
 {

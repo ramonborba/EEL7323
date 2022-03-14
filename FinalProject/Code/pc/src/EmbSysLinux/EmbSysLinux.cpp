@@ -81,7 +81,7 @@ uint8_t EmbSysLinux::sendCommand(uint8_t cmd){
 void EmbSysLinux::serialMonitor(){
     int i, nbytes;
 
-    datapkt_t data;
+    Datapkt data;
     
 
     if (serial == -1)
