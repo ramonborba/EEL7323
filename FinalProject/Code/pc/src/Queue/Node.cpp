@@ -7,13 +7,13 @@
 
 #include "Node.h"
 
-Node::Node(datapkt_t data, Node* nxt)
+Node::Node(Datapkt data, Node* nxt)
 {
     datapkt = data;
     next = nxt;
 }
 
-datapkt_t Node::getData()
+Datapkt Node::getData()
 {
     return datapkt;
 }
@@ -23,7 +23,7 @@ Node* Node::getNext()
     return next;
 }
 
-void Node::setData(datapkt_t data)
+void Node::setData(Datapkt data)
 {
     datapkt = data;
 }

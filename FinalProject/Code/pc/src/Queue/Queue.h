@@ -20,7 +20,7 @@ public:
     Queue();
     ~Queue();
 
-    void enqueue(datapkt_t);
+    void enqueue(Datapkt);
     void dequeue();
     
     void dateSearch(int, int);                          // Displays Log information between dates

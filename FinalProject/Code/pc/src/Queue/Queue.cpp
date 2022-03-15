@@ -25,7 +25,7 @@ Queue::~Queue()
     }
 }
 
-void Queue::enqueue(datapkt_t data)
+void Queue::enqueue(Datapkt data)
 {
     if (!tail)                                                  // Check if tail is not set (first node)
     {
