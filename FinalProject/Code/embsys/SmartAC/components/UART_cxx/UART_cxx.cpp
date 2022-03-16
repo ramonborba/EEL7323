@@ -23,7 +23,7 @@ UARTPort::UARTPort(uart_port_t portnum,
                     int rx_buffer_size,
                     int tx_buffer_size,
                     QueueHandle_t uart_queue,
-                    int queue_size) : port_num_{portnum}
+                    int queue_size) : port_num_{portnum}, config_{}
 {
     ESP_LOGD(LOG_TAG, "Constructing UART%d", port_num_);
     // Check for valid port number   
@@ -47,5 +47,18 @@ UARTPort::~UARTPort()
     ESP_LOGD(LOG_TAG, "Deleted UART%d driver", port_num_);
 }
 
+
+void UARTPort::set_config(const uart_config_t& cfg)
+{
+    // Call uart parameter configuration function
+    config_ = cfg;
+    uart_param_config(port_num_, &config_);
+    ESP_LOGD(LOG_TAG, "Configured UART%d parameters", port_num_);
+}
+void UARTPort::get_config(uart_config_t& cfg)
+{
+    cfg = config_;
+    ESP_LOGD(LOG_TAG, "Retrieving UART%d parameters", port_num_);
+}
 
 } // namespace idf

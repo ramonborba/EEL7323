@@ -42,6 +42,7 @@ class UARTPort
 {
 private:
     uart_port_t port_num_;
+    uart_config_t config_;
 public:
 
     /**
@@ -60,10 +61,9 @@ public:
                 int queue_size);
     ~UARTPort();
 
+    void set_config(const uart_config_t& cfg);
+    void get_config(uart_config_t& cfg);
 };
-
-
-
 
 
 
