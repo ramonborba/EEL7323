@@ -36,7 +36,15 @@ UARTPort::UARTPort(uart_port_t portnum,
             // Install UART driver
             uart_driver_install(portnum, BUFFER_SIZE * 2, BUFFER_SIZE * 2, queue_size, &uart_queue, 0);
             ESP_LOGD(LOG_TAG, "Installed UART%d driver", port_num_);
+            
+            // Store default configuration in config_
+            uart_get_baudrate(port_num_, (uint32_t*)&config_.baud_rate );
+            uart_get_word_length(port_num_, &config_.data_bits);
+            uart_get_parity(port_num_, &config_.parity);
+            uart_get_stop_bits(port_num_, &config_.stop_bits);
+            uart_get_hw_flow_ctrl(port_num_, &config_.flow_ctrl);
         }
+
     }
 }
 
@@ -55,6 +63,8 @@ void UARTPort::set_config(const uart_config_t& cfg)
     uart_param_config(port_num_, &config_);
     ESP_LOGD(LOG_TAG, "Configured UART%d parameters", port_num_);
 }
+
+
 void UARTPort::get_config(uart_config_t& cfg)
 {
     cfg = config_;

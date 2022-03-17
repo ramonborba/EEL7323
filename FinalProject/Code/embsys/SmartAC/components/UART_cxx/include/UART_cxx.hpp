@@ -61,8 +61,20 @@ public:
                 int queue_size);
     ~UARTPort();
 
+    /**
+     * @brief Set the config struct
+     * 
+     * @param cfg Reference to struct containig new configuration parameters
+     */
     void set_config(const uart_config_t& cfg);
+
+    /**
+     * @brief Get the config struct
+     * 
+     * @param cfg Reference to struct to receive current config parameters
+     */
     void get_config(uart_config_t& cfg);
+
 };
 
 
