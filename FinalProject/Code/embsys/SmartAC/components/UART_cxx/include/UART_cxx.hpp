@@ -18,14 +18,13 @@
 #include "driver/uart.h"
 #include "esp_exception.hpp"
 #include "system_cxx.hpp"
-#include "esp_log.h"
 
 #define BUFFER_SIZE (1024)
 
+static const char* UART_TAG = "UART_CPP";
 
 namespace idf {
 
-static const char* LOG_TAG = "UART_CPP";
 
 
 /**
@@ -75,9 +74,53 @@ public:
      */
     void get_config(uart_config_t& cfg);
 
+    
+    /**
+     * @brief Send  anumber of bytes trough uart
+     * 
+     * @param buffer Buffer containing the data to be sent
+     * @param size Amount of bytes to send
+     */
+    void write(const void* buffer, size_t size);
+
+    /**
+     * @brief Read a number of bytes from usrt
+     * 
+     * @param buffer Buffer to receive the data
+     * @param size Amount of bytes to read
+     * @param timeout Time in ms to wait
+     */
+    void read(void* buffer, size_t size, uint32_t timeout);
+
+    /**
+     * @brief Set the pins used by the uart, if not using the default ones
+     * 
+     * @param tx_pin TX pin
+     * @param rx_pin RX pin
+     * @param rts_pin RTS pin
+     * @param cts_pin CTS pin
+     */
+    void set_pins(int tx_pin, int rx_pin, int rts_pin, int cts_pin);
+    
+    /**
+     * @brief Enable pattern detection event
+     * 
+     * @param pattern_chr Char to detect
+     * @param chr_num Number of chars in the pattern
+     * @param chr_tout Timeout between chars in the pattern
+     * @param post_idle Post idle timeout
+     * @param pre_idle Pre idle timeout
+     */
+    void enable_pattern(char pattern_chr, uint8_t chr_num, int chr_tout, int post_idle, int pre_idle);
+    
+    /**
+     * @brief Disables pattern detection
+     * 
+     */
+    void disable_pattern();
+
+
 };
-
-
 
 } // namespace idf
 
