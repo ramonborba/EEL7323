@@ -8,20 +8,20 @@
 #ifndef NODE_H
 #define NODE_H
 
-#include "../Datapkt/Datapkt.h"
+#include <stdint.h>
 
 class Node
 {
 protected:
-    Datapkt datapkt;                      // Data packet information
+    uint32_t datapkt;                      // Data packet information
     Node* next;                             // Pointer to next node
 
 public:
-    Node(Datapkt datapkt, Node* next);          
+    Node(uint32_t datapkt, Node* next);          
     
-    Datapkt getData();
+    uint32_t getData();
     Node* getNext();
-    void setData(Datapkt data);
+    void setData(uint32_t data);
     void setNext(Node* nxt);
 };
 

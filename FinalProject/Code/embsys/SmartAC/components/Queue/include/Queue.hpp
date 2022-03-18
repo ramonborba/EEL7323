@@ -7,7 +7,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "Node.h"
+#include "Node.hpp"
 
 
 
@@ -20,11 +20,9 @@ public:
     Queue();
     ~Queue();
 
-    void enqueue(Datapkt);
+    void enqueue(uint32_t);
     void dequeue();
     
-    void dateSearch(int, int);                          // Displays Log information between dates
-    void printTotalTime();                              // Displays total time the AC was powered
 };
 
 #endif  /* QUEUE_H */

@@ -5,15 +5,15 @@
  * File: Node.cpp
  */
 
-#include "Node.h"
+#include "Node.hpp"
 
-Node::Node(Datapkt data, Node* nxt)
+Node::Node(uint32_t data, Node* nxt)
 {
     datapkt = data;
     next = nxt;
 }
 
-Datapkt Node::getData()
+uint32_t Node::getData()
 {
     return datapkt;
 }
@@ -23,7 +23,7 @@ Node* Node::getNext()
     return next;
 }
 
-void Node::setData(Datapkt data)
+void Node::setData(uint32_t data)
 {
     datapkt = data;
 }
