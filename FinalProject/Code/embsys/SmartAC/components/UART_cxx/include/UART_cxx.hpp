@@ -21,8 +21,6 @@
 
 #define BUFFER_SIZE (1024)
 
-static const char* UART_TAG = "UART_CPP";
-
 namespace idf {
 
 
@@ -56,7 +54,7 @@ public:
     UARTPort(uart_port_t portnum,
                 int rx_buffer_size,
                 int tx_buffer_size,
-                QueueHandle_t uart_queue,
+                QueueHandle_t* uart_queue,
                 int queue_size);
     ~UARTPort();
 

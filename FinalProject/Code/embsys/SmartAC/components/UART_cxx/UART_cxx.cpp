@@ -14,6 +14,7 @@
 #include "UART_cxx.hpp"
 #include "esp_log.h"
 
+static const char* UART_TAG = "UART_CPP";
 
 namespace idf
 {
@@ -23,7 +24,7 @@ UARTException::UARTException(esp_err_t error) : ESPException(error) { }
 UARTPort::UARTPort(uart_port_t portnum,
                     int rx_buffer_size,
                     int tx_buffer_size,
-                    QueueHandle_t uart_queue,
+                    QueueHandle_t* uart_queue,
                     int queue_size) : port_num_{portnum}, config_{}
 {
     ESP_LOGD(UART_TAG, "Constructing UART%d", port_num_);
@@ -35,7 +36,7 @@ UARTPort::UARTPort(uart_port_t portnum,
         if (!uart_is_driver_installed(port_num_))
         {
             // Install UART driver
-            uart_driver_install(portnum, BUFFER_SIZE * 2, BUFFER_SIZE * 2, queue_size, &uart_queue, 0);
+            uart_driver_install(portnum, BUFFER_SIZE * 2, BUFFER_SIZE * 2, queue_size, uart_queue, 0);
             ESP_LOGD(UART_TAG, "Installed UART%d driver", port_num_);
             
             // Store default configuration in config_
