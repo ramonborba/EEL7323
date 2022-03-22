@@ -10,6 +10,7 @@
 
 #include "esp_exception.hpp"
 #include "system_cxx.hpp"
+#include "esp_intr_alloc.h"
 
 namespace idf {
 
@@ -217,6 +218,8 @@ public:
 
 };
 
+class GPIOIntrType; // Prototype to be used in GPIOBase - user added
+
 /**
  * @brief Implementations commonly used functionality for all GPIO configurations.
  *
@@ -278,6 +281,21 @@ protected:
     GPIODriveStrength get_drive_strength();
 
     /**
+     * @brief Get the number of the configured GPIO pin. Disclaimer:Method added by Ramon de Araujo Borba <ramonborba97@gmail.com>
+     * 
+     * @return The GPIONum object of the confugured GPIO pin.
+     */
+    GPIONum get_num() { return gpio_num; };
+
+    /**
+     * @brief Set the interrupt type for a given GPIONum
+     * 
+     * @param intr_type The interrupt type to set
+     */
+    void set_intr_type(GPIOIntrType intr_type);
+
+
+    /**
      * @brief The number of the configured GPIO pin.
      */
     GPIONum gpio_num;
@@ -314,6 +332,7 @@ public:
 
     using GPIOBase::set_drive_strength;
     using GPIOBase::get_drive_strength;
+    using GPIOBase::get_num;
 };
 
 /**
@@ -360,6 +379,9 @@ public:
      * @throws GPIOException if the underlying driver function fails.
      */
     void wakeup_disable();
+
+    using GPIOBase::get_num;
+    using GPIOBase::set_intr_type;
 };
 
 /**
@@ -395,7 +417,104 @@ public:
 
     using GPIOBase::set_drive_strength;
     using GPIOBase::get_drive_strength;
+
+    using GPIOBase::get_num;
 };
+
+/***************************************************************************************/
+/** FROM HERE ON
+ * Author: Ramon de Araujo Borba < ramonborba97@gmail.com >
+ * Institution: UFSC
+ * Date: 20/03/2022
+ */
+
+/**
+ * Represents a valid interrupt type configuration for GPIOs.
+ * It is supposed to resemble an enum type, hence it has static creation methods and a private constructor.
+ * This class is a "Strong Value Type", see also the template class \c StrongValue for more properties.
+ */
+class GPIOIntrType final : public StrongValueComparable<uint32_t> {
+private:
+    /**
+     * Constructor is private since it should only be accessed by the static creation methods.
+     *
+     * @param intr_type A valid numerical respresentation of the interrupt type configuration. Must be valid!
+     */
+    explicit GPIOIntrType(uint32_t intr_type) : StrongValueComparable<uint32_t>(intr_type) { }
+
+public:
+    /**
+     * Create a representation of disable interrupt configuration.
+     * For more information, check the driver and HAL files.
+     */
+    static GPIOIntrType DISABLE();
+
+    /**
+     * Create a representation of a rising edge interrupt configuration.
+     * For more information, check the driver and HAL files.
+     */
+    static GPIOIntrType RISING_EDGE();
+
+    /**
+     * Create a representation of a falling edge interrupt configuration.
+     * For more information, check the driver and HAL files.
+     */
+    static GPIOIntrType FALLING_EDGE();
+
+    /**
+     * Create a representation of a any edge interrupt configuration.
+     * For more information, check the driver and HAL files.
+     */
+    static GPIOIntrType ANY_EDGE();
+
+    /**
+     * Create a representation of a low level interrupt configuration.
+     * For more information, check the driver and HAL files.
+     */
+    static GPIOIntrType LOW_LEVEL();
+
+    /**
+     * Create a representation of a high level interrupt configuration.
+     * For more information, check the driver and HAL files.
+     */
+    static GPIOIntrType HIGH_LEVEL();
+
+    using StrongValueComparable<uint32_t>::operator==;
+    using StrongValueComparable<uint32_t>::operator!=;
+
+    /**
+     * Retrieves the valid numerical representation of the interrupt type mode.
+     */
+    uint32_t get_intr_type() const { return get_value(); };
+};
+
+/**
+ * @brief Class designed to manage GPIO interrupts
+ * 
+ */
+class GPIOIntrManager
+{
+public:
+    GPIOIntrManager();
+    ~GPIOIntrManager();
+
+    /**
+     * @brief Assign a ISR handler function to a GPIO pin.
+     * 
+     * @param gpio_num The GPIO pin to assign the handler to.
+     * @param handler The ISR handler to be assigned.
+     * @param args Arguments to be passed to the ISR handler.
+     */
+    void add_isr_handler(GPIONum gpio_num, intr_handler_t handler, void* args);
+
+    /**
+     * @brief Removes any ISR handlers assigned to a given GPIO pin.
+     * 
+     * @param gpio_num GPIO pin to remove the handlers from.
+     */
+    void remove_isr_handler(GPIONum gpio_num);
+};
+
 
 }
 

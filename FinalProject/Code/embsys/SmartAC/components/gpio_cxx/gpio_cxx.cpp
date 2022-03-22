@@ -9,6 +9,10 @@
 #include <array>
 #include "driver/gpio.h"
 #include "gpio_cxx.hpp"
+#include "esp_log.h"
+#include "esp_intr_alloc.h"
+
+static const char *GPIO_CPP_TAG = "GPIO_CPP";
 
 namespace idf {
 
@@ -203,6 +207,68 @@ void GPIO_OpenDrain::set_floating()
 void GPIO_OpenDrain::set_low()
 {
     GPIO_CHECK_THROW(gpio_set_level(gpio_to_driver_type(gpio_num), 0));
+}
+
+/***************************************************************************************/
+/** FROM HERE ON
+ * Author: Ramon de Araujo Borba < ramonborba97@gmail.com >
+ * Institution: UFSC
+ * Date: 20/03/2022
+ */
+
+void GPIOBase::set_intr_type(GPIOIntrType intr_type){
+    gpio_set_intr_type(gpio_to_driver_type(gpio_num), static_cast<gpio_int_type_t>(intr_type.get_intr_type()));
+    ESP_LOGD(GPIO_CPP_TAG, "Interrupt type for GPIO pin %d set to %d", gpio_num.get_value(), intr_type.get_intr_type());
+}
+
+GPIOIntrType GPIOIntrType::DISABLE(){
+    return GPIOIntrType(GPIO_INTR_DISABLE);
+}
+
+GPIOIntrType GPIOIntrType::RISING_EDGE(){
+    return GPIOIntrType(GPIO_INTR_POSEDGE);
+}
+
+GPIOIntrType GPIOIntrType::FALLING_EDGE(){
+    return GPIOIntrType(GPIO_INTR_NEGEDGE);
+}
+
+GPIOIntrType GPIOIntrType::ANY_EDGE(){
+    return GPIOIntrType(GPIO_INTR_ANYEDGE);
+}
+
+GPIOIntrType GPIOIntrType::LOW_LEVEL(){
+    return GPIOIntrType(GPIO_INTR_LOW_LEVEL);
+}
+
+GPIOIntrType GPIOIntrType::HIGH_LEVEL(){
+    return GPIOIntrType(GPIO_INTR_HIGH_LEVEL);
+}
+
+
+GPIOIntrManager::GPIOIntrManager()
+{
+    ESP_LOGD(GPIO_CPP_TAG, "Creating GPIOIntrManager");
+    GPIO_CHECK_THROW(gpio_install_isr_service(ESP_INTR_FLAG_LOWMED | ESP_INTR_FLAG_EDGE));
+    ESP_LOGD(GPIO_CPP_TAG, "Installed ISR service");
+}
+
+GPIOIntrManager::~GPIOIntrManager()
+{
+
+    ESP_LOGD(GPIO_CPP_TAG, "Destrying GPIOIntrManager");
+    gpio_uninstall_isr_service();
+    ESP_LOGD(GPIO_CPP_TAG, "Uninstalled ISR service");
+}
+
+void GPIOIntrManager::add_isr_handler(GPIONum gpio_num, intr_handler_t handler, void* args){
+    gpio_isr_handler_add(gpio_to_driver_type(gpio_num), handler, args);
+    ESP_LOGD(GPIO_CPP_TAG, "Added ISR handler for GPIO pin %d", gpio_num.get_value());
+}
+
+void GPIOIntrManager::remove_isr_handler(GPIONum gpio_num){
+    gpio_isr_handler_remove(gpio_to_driver_type(gpio_num));
+    ESP_LOGD(GPIO_CPP_TAG, "Removed ISR handlers for GPIO pin %d", gpio_num.get_value());
 }
 
 }
