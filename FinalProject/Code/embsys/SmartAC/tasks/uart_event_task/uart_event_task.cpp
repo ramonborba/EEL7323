@@ -32,7 +32,7 @@ void uart_event_task(void* pvParameters)
             {
                 uart.read(&cmd, event.size, 10/portTICK_PERIOD_MS);
                 // TODO
-                // Check command and trigger log sendind
+                // Check command and trigger log transmission
             }
             else
             {
