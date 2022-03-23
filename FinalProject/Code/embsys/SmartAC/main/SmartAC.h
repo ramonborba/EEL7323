@@ -10,7 +10,6 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
-#include "esp_intr_alloc.h"
 #include "UART_cxx.hpp"
 
 #define LED_PIN 2
@@ -26,13 +25,16 @@
 #define HOST_UART_STOP_BITS          UART_STOP_BITS_1
 #define HOST_UART_FLOW_CTRL          UART_HW_FLOWCTRL_DISABLE
 
-//Uart event queue
-static QueueHandle_t uart0_queue;
+//Queue handles
+extern QueueHandle_t uart_event_queue;
+extern QueueHandle_t gpio_interrupt_queue;
+
 
 // Uart port pointer
-static idf::UARTPort uart (HOST_UART_NUM, 2048, 2048, &uart0_queue, 20);
+idf::UARTPort uart (HOST_UART_NUM, 2048, 2048, &uart_event_queue, 20);
 
 // Task handles
-static TaskHandle_t uart_event_task_handle;
+extern TaskHandle_t uart_event_task_handle;
+extern TaskHandle_t gpio_event_task_handle;
 
 #endif /* SMART_AC_H_ */
