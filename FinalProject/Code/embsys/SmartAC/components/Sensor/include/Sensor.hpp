@@ -10,12 +10,9 @@
 
 class Sensor {
 	    int sensor_ID;
-	    float valor;
 	protected:
 		int getID();
 		void setID(int);
-		float getValor();
-		void setValor(float);
 		virtual void readSensor() = 0;		// funcao virtual pura
 };
 

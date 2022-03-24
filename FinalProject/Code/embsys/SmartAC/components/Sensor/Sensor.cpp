@@ -14,11 +14,3 @@ int Sensor::getID(){
 void Sensor::setID(int newID){
 	sensor_ID = newID;
 }
-
-float Sensor::getValor(){
-	return valor;
-}
-
-void Sensor::setValor(float newValor){
-	valor = newValor;
-}
