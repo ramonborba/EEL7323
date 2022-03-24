@@ -8,11 +8,20 @@
 #ifndef CLOCK_HPP_
 #define CLOCK_HPP_
 
+// clock_t structure containing time information
+struct clock_t
+{
+    uint8_t hr;
+    uint8_t min;
+    uint8_t sec;
+    bool    is_pm;
+};
+
+
 //Clock class
 class Clock {
     protected:
-        int hr, min, sec;   // Time specification
-        bool is_pm;         // am:pm indicator, true for pm, false for am
+        clock_t time;
     public:
     	/**
     	 * @brief Construct a new Clock object with default constructor.

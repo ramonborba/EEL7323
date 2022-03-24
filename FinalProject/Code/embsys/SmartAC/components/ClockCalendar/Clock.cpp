@@ -8,50 +8,46 @@
 #include "Clock.hpp"
 
 //Clock class members
-Clock::Clock() : hr { 0 }, min { 0 }, sec { 0 }, is_pm { false }
-{
-}
+Clock::Clock() : time {} {}
 
-Clock::Clock(int h, int m, int s, bool pm) : hr { h }, min { m }, sec { s }, is_pm { pm } 
-{
-}
+Clock::Clock(int h, int m, int s, bool pm) : time { h, m, s, pm } {}
 
 void Clock::setClock (int h, int m, int s, bool pm){
-    hr = h;
-    min = m;
-    sec = s;
-    is_pm = pm;
+    time.hr = h;
+    time.min = m;
+    time.sec = s;
+    time.is_pm = pm;
 }
 
 void Clock::readClock (int& h, int& m, int& s, bool& pm){
-    h = hr;
-    m = min;
-    s = sec;
-    pm = is_pm;
+    h = time.hr;
+    m = time.min;
+    s = time.sec;
+    pm = time.is_pm;
 }
 
 void Clock::advance(){
-    sec++;
-    if (sec >= 60)
+    time.sec++;
+    if (time.sec >= 60)
     {
-        sec = 0;
-        min ++;
-        if (min >= 60)
+        time.sec = 0;
+        time.min ++;
+        if (time.min >= 60)
         {
-            min = 0;
-            hr++;
-            if (hr >=13)
+            time.min = 0;
+            time.hr++;
+            if (time.hr >=13)
             {
-                hr = 1;
+                time.hr = 1;
             }
-            if ((hr >= 12) && (is_pm)) //passa de pm para am >> 11:59:59 > 00:00:00
+            if ((time.hr >= 12) && (time.is_pm)) //passa de pm para am >> 11:59:59 > 00:00:00
             {
-                hr = 0;
-                is_pm = !is_pm;
+                time.hr = 0;
+                time.is_pm = !time.is_pm;
             }
-            else if ((hr >= 12) && (!is_pm))
+            else if ((time.hr >= 12) && (!time.is_pm))
             {
-                is_pm = !is_pm;
+                time.is_pm = !time.is_pm;
             }   
         }   
     }   

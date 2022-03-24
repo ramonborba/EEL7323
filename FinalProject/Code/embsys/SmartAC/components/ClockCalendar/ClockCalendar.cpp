@@ -44,9 +44,9 @@ ClockCalendar::ClockCalendar(time_t current_time){
 }
 
 void ClockCalendar::advance (){
-    bool was_pm = is_pm;
+    bool was_pm = time.is_pm;
     Clock::advance();
-    if ((was_pm) && (!is_pm))
+    if ((was_pm) && (!time.is_pm))
     {
         Calendar::advance();
     }

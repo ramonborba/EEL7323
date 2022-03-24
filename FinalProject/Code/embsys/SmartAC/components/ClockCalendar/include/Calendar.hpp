@@ -8,10 +8,18 @@
 #ifndef CALENDAR_HPP_
 #define CALENDAR_HPP_
 
+// calendar_t structure containing time information
+struct calendar_t
+{
+    uint8_t mo;
+    uint8_t day;
+    uint8_t yr;
+};
+
 //Calendar class
 class Calendar {
     protected:
-        int mo, day, yr;
+        calendar_t date;
     public:
         /**
          * @brief Construct a new Calendar object with default constructor.
