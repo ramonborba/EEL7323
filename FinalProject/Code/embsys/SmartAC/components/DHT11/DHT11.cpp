@@ -8,35 +8,34 @@
 #include "DHT11.hpp"
 
 
-DHT11::DHT11() : Sensor(), timestamp {}, data {} {}
+DHT11::DHT11() : data_ {}, timestamp_ {} {}
 
 
 dht11_data_t DHT11::getData() 
 {
-    return data;
+    return data_;
 }
 
-ClockCalendar DHT11::getTimestamp()
+void DHT11::getTimestamp(clock_t &rd_time, calendar_t &rd_date)
 {
-    return timestamp;
+    timestamp_.readClock(rd_time);
+    timestamp_.readCalendar(rd_date);
 }
 
 void DHT11::readSensor()
 {
     // Random value generation for sensor data as a place holder
-
     float rng_num;
-    uint8_t newTemp_int {0};
-    uint8_t newHumi_int {0};
 
-	// Data/hora da leitura do sensor
-	timestamp = ClockCalendar(time(nullptr));
+	// Time and date of the reading
+	timestamp_ = ClockCalendar(time(nullptr));
+    getTimestamp(data_.reading_time, data_.reading_date);
 
-	// Simulacao de leitura de sensor
+	// Sensor reading simulation
 	srand(static_cast <unsigned> (time(0)));
 	rng_num = ((static_cast <float> (rand()) / static_cast <float> (RAND_MAX))*TEMP_RANGE)+TEMP_MIN;
-    data.humidity_int = static_cast <uint8_t> (rng_num);
+    data_.humidity_int = static_cast <uint8_t> (rng_num);
 	rng_num = ((static_cast <float> (rand()) / static_cast <float> (RAND_MAX))*TEMP_RANGE)+TEMP_MIN;
-    data.temp_int = static_cast <uint8_t> (rng_num);
+    data_.temp_int = static_cast <uint8_t> (rng_num);
 
 }
