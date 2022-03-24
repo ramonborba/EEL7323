@@ -3,21 +3,17 @@
  * Author: Ramon de Araujo Borba < ramonborba97@gmail.com >
  * Institution: UFSC
  * Date: 10/11/2021
- * File: calendar.cpp
+ * File: Calendar.cpp
  */
 #include "Calendar.hpp"
 
 //Calendar class members
-Calendar::Calendar(){
-    mo = 0;
-    day = 0;
-    yr = 0;
+Calendar::Calendar() : mo { 0 }, day { 0 }, yr { 0 }
+{
 }
 
-Calendar::Calendar(int m, int d, int y){
-    mo = m;
-    day = d;
-    yr = y;
+Calendar::Calendar(int m, int d, int y) : mo { m }, day { d }, yr { y }
+{
 }
 
 void Calendar::setCalendar(int m, int d, int y){
