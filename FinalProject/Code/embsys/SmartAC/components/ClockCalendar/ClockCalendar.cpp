@@ -12,6 +12,8 @@ ClockCalendar::ClockCalendar() : Clock(), Calendar() {}
 
 ClockCalendar::ClockCalendar(int mt, int d, int y, int h, int m, int s, bool pm) : Clock(h, m, s, pm), Calendar(mt, d, y) {}
 
+ClockCalendar::ClockCalendar(clock_t new_time, calendar_t new_date) : Clock(new_time), Calendar(new_date) {}
+
 ClockCalendar::ClockCalendar(time_t current_time){
     int mt, d, y, h, m, s;
     bool pm = false;
@@ -44,9 +46,9 @@ ClockCalendar::ClockCalendar(time_t current_time){
 }
 
 void ClockCalendar::advance (){
-    bool was_pm = time.is_pm;
+    bool was_pm = time_.is_pm;
     Clock::advance();
-    if ((was_pm) && (!time.is_pm))
+    if ((was_pm) && (!time_.is_pm))
     {
         Calendar::advance();
     }

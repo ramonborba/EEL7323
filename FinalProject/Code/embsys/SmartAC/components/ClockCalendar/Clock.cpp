@@ -8,46 +8,58 @@
 #include "Clock.hpp"
 
 //Clock class members
-Clock::Clock() : time {} {}
+Clock::Clock() : time_ {} {}
 
-Clock::Clock(int h, int m, int s, bool pm) : time { h, m, s, pm } {}
+Clock::Clock(int h, int m, int s, bool pm) : time_ { h, m, s, pm } {}
+
+Clock::Clock(clock_t new_time) : time_ { new_time } {}
 
 void Clock::setClock (int h, int m, int s, bool pm){
-    time.hr = h;
-    time.min = m;
-    time.sec = s;
-    time.is_pm = pm;
+    time_.hr = h;
+    time_.min = m;
+    time_.sec = s;
+    time_.is_pm = pm;
+}
+
+void Clock::setClock(clock_t new_time)
+{
+    time_ = new_time;
 }
 
 void Clock::readClock (int& h, int& m, int& s, bool& pm){
-    h = time.hr;
-    m = time.min;
-    s = time.sec;
-    pm = time.is_pm;
+    h = time_.hr;
+    m = time_.min;
+    s = time_.sec;
+    pm = time_.is_pm;
+}
+
+void Clock::readClock(clock_t &rd_time)
+{
+    rd_time = time_;
 }
 
 void Clock::advance(){
-    time.sec++;
-    if (time.sec >= 60)
+    time_.sec++;
+    if (time_.sec >= 60)
     {
-        time.sec = 0;
-        time.min ++;
-        if (time.min >= 60)
+        time_.sec = 0;
+        time_.min ++;
+        if (time_.min >= 60)
         {
-            time.min = 0;
-            time.hr++;
-            if (time.hr >=13)
+            time_.min = 0;
+            time_.hr++;
+            if (time_.hr >=13)
             {
-                time.hr = 1;
+                time_.hr = 1;
             }
-            if ((time.hr >= 12) && (time.is_pm)) //passa de pm para am >> 11:59:59 > 00:00:00
+            if ((time_.hr >= 12) && (time_.is_pm)) //passa de pm para am >> 11:59:59 > 00:00:00
             {
-                time.hr = 0;
-                time.is_pm = !time.is_pm;
+                time_.hr = 0;
+                time_.is_pm = !time_.is_pm;
             }
-            else if ((time.hr >= 12) && (!time.is_pm))
+            else if ((time_.hr >= 12) && (!time_.is_pm))
             {
-                time.is_pm = !time.is_pm;
+                time_.is_pm = !time_.is_pm;
             }   
         }   
     }   

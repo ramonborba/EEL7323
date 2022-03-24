@@ -8,6 +8,8 @@
 #ifndef CALENDAR_HPP_
 #define CALENDAR_HPP_
 
+#include <cstdint>
+
 // calendar_t structure containing time information
 struct calendar_t
 {
@@ -19,7 +21,7 @@ struct calendar_t
 //Calendar class
 class Calendar {
     protected:
-        calendar_t date;
+        calendar_t date_;
     public:
         /**
          * @brief Construct a new Calendar object with default constructor.
@@ -37,6 +39,13 @@ class Calendar {
         Calendar (int m, int d, int y);
 
         /**
+         * @brief Construct a new Calendar object using calendar_t struct
+         * 
+         * @param new_date New date to be set
+         */
+        Calendar (calendar_t new_date);
+
+        /**
          * @brief Set the Calendar object.
          * 
          * @param m Month.
@@ -46,6 +55,13 @@ class Calendar {
         void setCalendar (int m, int d, int y);
 
         /**
+         * @brief Set the Calendar object using calendar_t struct
+         * 
+         * @param new_date New date to be set
+         */
+        void setCalendar (calendar_t new_date);
+
+        /**
          * @brief Reads currently stored date. Values passed by reference.
          * 
          * @param m Month.
@@ -53,6 +69,13 @@ class Calendar {
          * @param y Year.
          */
         void readCalendar (int& m, int& d, int& y);
+
+        /**
+         * @brief Read currently stored date using calendar_t struct
+         * 
+         * @param rd_date struct to hold the date
+         */
+        void readCalendar (calendar_t &rd_date);
 
         /**
          * @brief Advance the calendar by one day.

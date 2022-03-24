@@ -8,32 +8,44 @@
 #include "Calendar.hpp"
 
 //Calendar class members
-Calendar::Calendar() : date {} {}
+Calendar::Calendar() : date_ {} {}
 
-Calendar::Calendar(int m, int d, int y) : date { m, d, y } {}
+Calendar::Calendar(int m, int d, int y) : date_ { m, d, y } {}
+
+Calendar::Calendar(calendar_t new_date) : date_ { new_date } {}
 
 void Calendar::setCalendar(int m, int d, int y){
-    date.mo = m;
-    date.day = d;
-    date.yr = y;
+    date_.mo = m;
+    date_.day = d;
+    date_.yr = y;
+}
+
+void Calendar::setCalendar(calendar_t new_date)
+{
+    date_ = new_date;
 }
 
 void Calendar::readCalendar(int& m, int& d, int& y){
-    m = date.mo;
-    d = date.day;
-    y = date.yr;
+    m = date_.mo;
+    d = date_.day;
+    y = date_.yr;
+}
+
+void Calendar::readCalendar(calendar_t &rd_date)
+{
+    rd_date = date_;
 }
 
 void Calendar::advance(){
-    date.day++;
-    if (date.day > 30)
+    date_.day++;
+    if (date_.day > 30)
     {
-        date.day = 1;
-        date.mo++;
-        if (date.mo > 12)
+        date_.day = 1;
+        date_.mo++;
+        if (date_.mo > 12)
         {
-            date.mo = 1;
-            date.yr++;
+            date_.mo = 1;
+            date_.yr++;
         }
     }
 }

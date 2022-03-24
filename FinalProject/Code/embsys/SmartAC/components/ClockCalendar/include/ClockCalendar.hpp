@@ -33,6 +33,14 @@ class ClockCalendar : public Clock, public Calendar {
          * @param pm am:pm indicator.
          */
         ClockCalendar (int mt, int d, int y, int h, int m, int s, bool pm);
+
+        /**
+         * @brief Construct a new Clock Calendar object with clock_t and calendar_t structs
+         * 
+         * @param new_time New time to set
+         * @param new_date New date to set
+         */
+        ClockCalendar (clock_t new_time, calendar_t new_date);
         
         /**
          * @brief Construct a new Clock Calendar object using time_t type from ctime library.
