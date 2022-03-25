@@ -25,14 +25,14 @@ void uart_event_task(void* pvParameters)
     uint32_t cmd = 0;
     for(;;) {
         //Waiting for UART event.
-        if(xQueueReceive(uart0_queue, (void * )&event, portMAX_DELAY)) {
+        if(xQueueReceive(uart_event_queue, (void * )&event, portMAX_DELAY)) {
             cmd = 0;
             ESP_LOGD(EVT_TASK_TAG, "uart[%d] event:", HOST_UART_NUM);
             if (event.type==UART_DATA)
             {
                 uart.read(&cmd, event.size, 10/portTICK_PERIOD_MS);
                 // TODO
-                // Check command and trigger log sendind
+                // Check command and trigger log transmission
             }
             else
             {
