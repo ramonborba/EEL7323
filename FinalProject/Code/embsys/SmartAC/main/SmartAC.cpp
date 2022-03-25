@@ -14,16 +14,22 @@
 
 #include "SmartAC.h"
 #include "uart_event_task.hpp"
+#include "gpio_event_task.hpp"
 #include "esp_log.h"
+
 
 using namespace std;
 using namespace idf;
 
+// Defining extern variables
+// Queues
+QueueHandle_t gpio_interrupt_queue = xQueueCreate(5, sizeof(uint8_t));
+QueueHandle_t uart_event_queue;
+// Uart port
+UARTPort uart (HOST_UART_NUM, 2048, 2048, &uart_event_queue, 20);
 
 void test_gpio_handler (void* args);
 void uart_tx_task(void *pvParameters);
-void test_gpio_task(void *pvParameters);
-static QueueHandle_t gpio_queue;
 
 extern "C" void app_main(void)
 {
@@ -36,7 +42,14 @@ extern "C" void app_main(void)
     esp_log_level_set("GPIO_CPP", ESP_LOG_DEBUG);
     esp_log_level_set("GPIO_TASK", ESP_LOG_DEBUG);
 
+    
     // SETUP
+
+    // Task handles
+    TaskHandle_t uart_event_task_handle;
+    TaskHandle_t gpio_event_task_handle;
+
+
     // Configure GPIO pins
     GPIO_Output LED(GPIONum(LED_PIN));
     
@@ -48,13 +61,12 @@ extern "C" void app_main(void)
     cold_button.set_pull_mode(GPIOPullMode::PULLUP());
     cold_button.set_intr_type(GPIOIntrType::FALLING_EDGE());
 
-
     // Configure GPIO interrupts
     GPIOIntrManager ISRMngr;
     ISRMngr.add_isr_handler(hot_button.get_num(), test_gpio_handler, (void *)hot_button.get_num().get_value());
     ISRMngr.add_isr_handler(cold_button.get_num(), test_gpio_handler, (void *)cold_button.get_num().get_value());
-    gpio_queue = xQueueCreate(20, sizeof(uint32_t));
     
+
     // Configure UART port
     uart_config_t cfg = {};// UART config struct
     cfg.baud_rate = HOST_UART_BAUD;
@@ -62,13 +74,12 @@ extern "C" void app_main(void)
     cfg.parity = HOST_UART_PARITY;
     cfg.stop_bits = HOST_UART_STOP_BITS;
     cfg.flow_ctrl = HOST_UART_FLOW_CTRL;
-
     uart.set_config(cfg);
-    // uart.set_pins(18, 19, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
 
+    
     // CREATING TASKS
-    xTaskCreatePinnedToCore(uart_event_task, "uart_event_task", 2048, NULL, 12, &uart_event_task_handle, tskNO_AFFINITY);
-    xTaskCreatePinnedToCore(test_gpio_task, "tx_task", 2048, NULL, 5, NULL, tskNO_AFFINITY);
+    xTaskCreatePinnedToCore(uart_event_task, "uart_event_task", 2048, NULL, 5, &uart_event_task_handle, tskNO_AFFINITY);
+    xTaskCreatePinnedToCore(gpio_event_task, "gpio_event_task", 2048, NULL, 5, &gpio_event_task_handle, tskNO_AFFINITY);
     
 
     // LOOP
@@ -92,7 +103,7 @@ void test_gpio_handler (void* args){
     TickType_t now = xTaskGetTickCountFromISR();
     if ( (now - last_time) >= (500/portTICK_PERIOD_MS) )
     {
-        xQueueSendToBackFromISR(gpio_queue, &gpio, NULL);
+        xQueueSendToBackFromISR(gpio_interrupt_queue, &gpio, NULL);
         last_time = now;
     }
 }
@@ -105,18 +116,4 @@ void uart_tx_task(void *pvParameters){
         uart.write(&cmd, sizeof(cmd));
         vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
-}
-
-void test_gpio_task(void *pvParameters){
-    static const char *GPIO_TASK_TAG = "GPIO_TASK";
-    while (true)
-    {
-        uint32_t gpio_pin = 0;
-        ESP_LOGD(GPIO_TASK_TAG, "Waiting for QueueReceive");
-        if (xQueueReceive(gpio_queue, &gpio_pin, portMAX_DELAY))
-        {
-            ESP_LOGD(GPIO_TASK_TAG, "Received GPIO pin %d", gpio_pin);
-        }
-    }
-    
 }

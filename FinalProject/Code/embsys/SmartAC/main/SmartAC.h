@@ -30,8 +30,8 @@ extern QueueHandle_t uart_event_queue;
 extern QueueHandle_t gpio_interrupt_queue;
 
 
-// Uart port pointer
-idf::UARTPort uart (HOST_UART_NUM, 2048, 2048, &uart_event_queue, 20);
+// Uart port
+extern idf::UARTPort uart;
 
 // Task handles
 extern TaskHandle_t uart_event_task_handle;
